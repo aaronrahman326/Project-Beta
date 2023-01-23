@@ -10,14 +10,29 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sales_project.settings")
 django.setup()
 
 # Import models from sales_rest, here.
-# from sales_rest.models import Something
+from sales_rest.models import AutomobileVO
+
+
+def get_automobile():
+    response = requests.get("https://inventory-api:8000/api/automobiles/")
+    content = json.loads(response.content)
+    for automobile in content['automobiles']:
+        AutomobileVO.objects.update_or_create(
+            import_vin=automobile['vin'],
+            defaults={
+                "color": automobile['color'],
+                "year": automobile['year'],
+                "model": automobile['model'],
+            }
+        )
+
 
 def poll():
     while True:
         print('Sales poller polling for data')
         try:
             # Write your polling logic, here
-            pass
+            get_automobile()
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(60)

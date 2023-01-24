@@ -4,7 +4,8 @@ import Nav from './Nav';
 import AppointmentList from './AppointmentList';
 import TechnicianForm from './TechnicianForm';
 import CustomerForm from './CustomerForm';
-import SalesforceForm from './SalesforceForm';
+import EmployeeForm from './EmployeeForm';
+import SalesForm from './SalesForm';
 
 
 

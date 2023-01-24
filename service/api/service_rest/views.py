@@ -25,8 +25,7 @@ class AppointmentDetailEncoder(ModelEncoder):
         "technician",
         "start_date",
         "start_time",
-        "end_date",
-        "end_time",
+        "finish",
         "reason",
     ]
     encoders = {"technician": TechnicianListEncoder}

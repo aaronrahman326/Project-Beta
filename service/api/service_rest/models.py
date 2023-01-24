@@ -28,8 +28,7 @@ class Appointment(models.Model):
     customer_name = models.CharField(max_length=200, null=True, unique=True)
     start_date = models.DateField(null=True)
     start_time = models.TimeField(null=True)
-    end_time = models.TimeField(null=True)
-    end_date = models.DateField(null=True)
+    finish = models.BooleanField(default=False)
     technician = models.ForeignKey(
         Technician,
         on_delete=models.CASCADE,

@@ -12,6 +12,7 @@ django.setup()
 # Import models from service_rest, here.
 # from service_rest.models import Something
 
+
 def poll():
     while True:
         print('Service poller polling for data')

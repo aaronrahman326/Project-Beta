@@ -34,18 +34,19 @@ class Sales(models.Model):
 
     employee = models.ForeignKey(
         Employees,
-        related_name="",
+        related_name="employee",
+
         on_delete=models.CASCADE,
         null=True
     )
 
     customer = models.ForeignKey(
         Customers,
-        related_name="",
+        related_name="customer",
         on_delete=models.CASCADE,
         null=True
     )
-    sale_price = models.DecimalField(max_digits=15)
+    sale_price = models.DecimalField(max_digits=15, decimal_places=2)
 
     def __str__(self):
         return self.name

@@ -59,6 +59,16 @@ class CustomerEncoder(ModelEncoder):
     ]
 
 
+class VehicleEncoder(ModelEncoder):
+    model = Vehicles
+    properties = [
+        "model",
+        "color",
+        "year",
+        "picture_url"
+    ]
+
+
 @require_http_methods(["GET", "POST"])
 def api_list_sales(request, automobile_vo_id=None):
     if request.method == "GET":

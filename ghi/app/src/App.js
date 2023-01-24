@@ -5,6 +5,7 @@ import AppointmentList from './AppointmentList';
 import TechnicianForm from './TechnicianForm';
 import CustomerForm from './CustomerForm';
 import EmployeeForm from './EmployeeForm';
+import EmployeeList from './EmployeeList';
 import SalesForm from './SalesForm';
 
 
@@ -18,6 +19,7 @@ function App() {
           {/* <Route path="/" element={<MainPage />} />  */}
           {/* <Route path="technicians/new/" element={<TechnicianForm />} /> */}
           <Route path="employees">
+            <Route index element={<EmployeeList />} />
             <Route path="new" element={<EmployeeForm />} />
           </Route>
         </Routes>

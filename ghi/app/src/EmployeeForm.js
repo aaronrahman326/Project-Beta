@@ -7,7 +7,7 @@ function EmployeeForm() {
     })
 
     const [hasSignedUp, setHasSignedUp] = useState(false)
-    
+
         const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
@@ -61,10 +61,10 @@ function EmployeeForm() {
                 <input onChange={ handleChange } value={formData.employee_number} placeholder="Employee Number" required type="text" name="employee_number" id="employee_number" className="form-control"/>
                 <label htmlFor="employee_number">Employee Number</label>
               </div>
-              <button className="btn btn-primary">Create</button>
+              <button className="btn btn-primary">Sell your soul to the machine</button>
             </form>
             <div className={messageClasses} id="success-message">
-                Congratulations! You're all signed up!
+            Congratulations! You're now bound by all terms and conditions!
             </div>
           </div>
         </div>

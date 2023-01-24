@@ -8,7 +8,7 @@ from .models import AutomobileVO, Sales, Employees, Customers, Vehicles
 # Create your views here.
 
 
-class AutomobileEncoder(ModelEncoder):
+class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
         "vin",
@@ -24,6 +24,9 @@ class SalesEncoder(ModelEncoder):
     "sale_price"
     ]
 
+    def get_extra_data(self, o):
+        return {"automobile": o.automobile.name}
+
 
 class SalesDetailEncoder(ModelEncoder):
     model = Sales
@@ -34,6 +37,10 @@ class SalesDetailEncoder(ModelEncoder):
     "sale_price",
     "picture_url"
     ]
+
+    encoders = {
+        "automobile": AutomobileVOEncoder(),
+    }
 
 
 class EmployeeEncoder(ModelEncoder):

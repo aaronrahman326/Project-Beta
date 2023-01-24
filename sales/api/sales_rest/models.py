@@ -12,6 +12,7 @@ class Employees(models.Model):
     name = models.CharField(max_length=200)
     employee_number = models.IntegerField(null=True, blank=True)
 
+
 class Customers(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
@@ -20,7 +21,6 @@ class Customers(models.Model):
 
 class Vehicles(models.Model):
     vin = models.CharField(max_length=200)
-
 
 
 class Sales(models.Model):
@@ -46,3 +46,9 @@ class Sales(models.Model):
         null=True
     )
     sale_price = models.DecimalField(max_digits=15)
+
+    def __str__(self):
+        return self.name
+
+    def get_api_url(self):
+        return reverse("api_show_sale", kwargs={"pk": self.pk})

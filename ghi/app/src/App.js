@@ -16,7 +16,10 @@ function App() {
       <div className="container">
         <Routes>
           {/* <Route path="/" element={<MainPage />} />  */}
-          <Route path="technicians/new/" element={<TechnicianForm />} />
+          {/* <Route path="technicians/new/" element={<TechnicianForm />} /> */}
+          <Route path="employees">
+            <Route path="new" element={<EmployeeForm />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

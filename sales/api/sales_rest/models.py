@@ -8,24 +8,24 @@ class AutomobileVO(models.Model):
     vin = models.CharField(max_length=200)
 
 
-class Employee(models.Model):
+class Employees(models.Model):
     name = models.CharField(max_length=200)
     employee_number = models.IntegerField(null=True, blank=True)
 
-class Customer(models.Model):
+class Customers(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     phone_number = models.SmallIntegerField(unique=True)
 
 
-class Vehicle(models.Model):
+class Vehicles(models.Model):
     vin = models.CharField(max_length=200)
-    
 
 
-class Sale(models.Model):
+
+class Sales(models.Model):
     vehicle = models.ForeignKey(
-        Vehicle,
+        Vehicles,
         on_delete=models.CASCADE,
         related_name='sale_vehicle',
         null=True,
@@ -33,14 +33,14 @@ class Sale(models.Model):
     )
 
     employee = models.ForeignKey(
-        Employee,
+        Employees,
         related_name="",
         on_delete=models.CASCADE,
         null=True
     )
 
     customer = models.ForeignKey(
-        Customer,
+        Customers,
         related_name="",
         on_delete=models.CASCADE,
         null=True

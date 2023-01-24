@@ -4,7 +4,7 @@ from django.views.decorators.http import require_http_methods
 import json
 
 from common.json import ModelEncoder
-from .models import AutomobileVO, Sale, Employee, Customer, VehicleEncoder
+from .models import AutomobileVO, Sales, Employees, Customers, Vehicles
 # Create your views here.
 
 
@@ -15,8 +15,8 @@ class AutomobileEncoder(ModelEncoder):
     ]
 
 
-class SaleEncoder(ModelEncoder):
-    model = Sale
+class SalesEncoder(ModelEncoder):
+    model = Sales
     properties = [
     "vin",
     "employee",
@@ -25,15 +25,26 @@ class SaleEncoder(ModelEncoder):
     ]
 
 
+class SalesDetailEncoder(ModelEncoder):
+    model = Sales
+    properties = [
+    "vin",
+    "employee",
+    "customer",
+    "sale_price",
+    "picture_url"
+    ]
+
+
 class EmployeeEncoder(ModelEncoder):
-    model = Employee
+    model = Employees
     properties = [
         "name",
         "employee_number"
     ]
 
 class CustomerEncoder(ModelEncoder):
-    model = Customer
+    model = Customers
     properties = [
         "name",
         "address",
@@ -42,7 +53,34 @@ class CustomerEncoder(ModelEncoder):
 
 
 @require_http_methods(["GET", "POST"])
-def api_list_sales(request):
+def api_list_sales(request, automobile_vo_id=None):
+    if request.method == "GET":
+        if automobile_vo_id is not None:
+            sales = Sales.objects.filter(automobile=automobile_vo_id)
+        else:
+            sales = Sales.objects.all()
+        return JsonResponse(
+            {"sales":sales},
+            encoder=SalesEncoder
+        )
+    else:
+        content = json.loads(request.body)
+        try:
+            automobile_vin = content["automobile"]
+            automobile = AutomobileVO.objects.get(import_vin=automobile_vin)
+            content["automobile"] = automobile
+        except AutomobileVO.DoesNotExist:
+            return JsonResponse(
+                {"ERROR": "TRY AGAIN BIG GUY"},
+                status=400
+            )
+
+        automobile = Sales.objects.create(**content)
+        return JsonResponse(
+            automobile,
+            encoder=SalesDetailEncoder,
+            safe=False,
+        )
 
 
 
@@ -50,7 +88,43 @@ def api_list_sales(request):
 def api_show_sale(request, pk):
     if request.method == "GET":
         try:
-            sale = Sale.objects.get(pk=pk)
-        return JsonResponse(SaleEncoder(sale).data, safe=False)
+            sale = Sales.objects.get(id=pk)
+            return JsonResponse(
+                sale,
+                encoder=SalesDetailEncoder,
+                safe=False,
+            )
+        except Sales.DoesNotExist:
+            return JsonResponse(
+                {"message": "TRY AGAIN NOT SALE FOUND"},
+                status=400
+            )
     elif request.method == "PUT":
-        sale = Sale.objects.get(pk=pk)
+        try:
+            content = json.loads(request.body)
+            Sales.objects.filter(id=pk).update(**content)
+            sale = Sales.objects.get(id=pk)
+        except Sales.DoesNotExist:
+            return JsonResponse(
+                {"message": "TRY AGAIN NOT SALE FOUND"},
+                status=400
+            )
+        return JsonResponse(
+            sale,
+            encoder=SalesDetailEncoder,
+            safe=False,
+        )
+    else:
+        try:
+            sale = Sales.objects.get(id=pk)
+            sale.delete()
+            return JsonResponse(
+                {"message": "SALE DELETED"},
+                sale,
+                encoder=Sales,
+                safe=False,
+            )
+        except Sales.DoesNotExist:
+            return JsonResponse(
+                {"message": "No sale to delete"},
+            )

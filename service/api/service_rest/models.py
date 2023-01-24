@@ -4,9 +4,9 @@ from django.urls import reverse
 # Create your models here.
 
 class AutomobileVO(models.Model):
-    import_href = models.CharField(max_length=100, unique=True)
-    color = models.CharField(max_length=50)
-    year = models.PositiveSmallIntegerField()
+    import_href = models.CharField(max_length=100, null=True, unique=True)
+    color = models.CharField(max_length=50, null=True)
+    year = models.PositiveSmallIntegerField(null=True)
     vin = models.CharField(max_length=17, unique=True)
 
     def get_api_url(self):

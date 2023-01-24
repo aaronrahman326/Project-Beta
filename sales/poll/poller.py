@@ -18,11 +18,9 @@ def get_automobile():
     content = json.loads(response.content)
     for automobile in content['autos']:
         AutomobileVO.objects.update_or_create(
-            import_href=automobile['href'],
+            import_href = automobile['href'],
             defaults={
-                "color": automobile['color'],
-                "year": automobile['year'],
-                "model": automobile['model'],
+                "vin": automobile['vin'],
             }
         )
 

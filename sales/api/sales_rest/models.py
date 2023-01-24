@@ -12,7 +12,7 @@ class AutomobileVO(models.Model):
 
     def get_api_url(self):
         return reverse("api_automobile", kwargs={"vin": self.vin})
-    
+
 
 
 class Employees(models.Model):
@@ -23,7 +23,12 @@ class Employees(models.Model):
 class Customers(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
-    phone_number = models.SmallIntegerField(unique=True)
+    phone_number = models.BigIntegerField()
+
+    def __str__(self):
+        return self.name
+    def get_api_url(self):
+        return reverse("api_list_employees", kwargs={"pk": self.id})
 
 
 class Vehicles(models.Model):

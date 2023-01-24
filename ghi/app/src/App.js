@@ -1,7 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
+import AppointmentList from './AppointmentList';
 import TechnicianForm from './TechnicianForm';
+import CustomerForm from './CustomerForm';
+import SalesforceForm from './SalesforceForm';
+
+
 
 function App() {
   return (

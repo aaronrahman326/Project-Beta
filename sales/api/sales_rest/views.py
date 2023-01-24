@@ -145,3 +145,51 @@ def api_show_sale(request, pk):
             return JsonResponse(
                 {"message": "No sale to delete"},
             )
+
+
+@require_http_methods(["GET", "POST"])
+def api_list_employees(request):
+    if request.method == "GET":
+        employees = Employees.objects.all()
+        return JsonResponse(
+
+            {"employees":employees},
+            encoder = EmployeeEncoder)
+    else:
+        content = json.loads(request.body)
+        try:
+            employees = Employees.objects.create(**content)
+            print(content)
+            return JsonResponse(
+                employees,
+                encoder = EmployeeEncoder,
+                safe=False
+                )
+        except:
+            return JsonResponse(
+                {"error":"Employee already exists mate"},
+            )
+
+
+@require_http_methods(["GET", "POST"])
+def api_list_customers(request):
+    if request.method == "GET":
+        customers = Customers.objects.all()
+        return JsonResponse(
+
+            {"customers":customers},
+            encoder = CustomerEncoder)
+    else:
+        content = json.loads(request.body)
+        try:
+            customer = Customers.objects.create(**content)
+            print(content)
+            return JsonResponse(
+                customer,
+                encoder = CustomerEncoder,
+                safe=False
+                )
+        except:
+            return JsonResponse(
+                {"error":"Customer already exists mate"},
+            )

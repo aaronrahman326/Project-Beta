@@ -10,7 +10,7 @@ function TechnicianForm() {
         event.preventDefault()
         console.log(formData)
 
-        const TechnicialUrl = 'http://localhost:8080/api/technicians'
+        const TechnicialUrl = 'http://localhost:8080/api/technicians/'
         const fetchConfig = {
             method: 'POST',
             body: JSON.stringify(formData),

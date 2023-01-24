@@ -14,7 +14,7 @@ class AutomobileVO(models.Model):
 
 class Technician(models.Model):
     name = models.CharField(max_length=100)
-    employee_number = models.PositiveSmallIntegerField(null=True, unique=True)
+    employee_number = models.BigIntegerField(null=True, unique=True)
 
     def __str__(self):
         return self.name
@@ -23,7 +23,7 @@ class Technician(models.Model):
 
 
 class Appointment(models.Model):
-    vin = models.PositiveSmallIntegerField(max_length=17, unique=True)
+    vin = models.CharField(max_length=17, unique=True)
     vip = models.BooleanField(default=False)
     customer_name = models.CharField(max_length=200, null=True, unique=True)
     start_date = models.DateField(null=True)

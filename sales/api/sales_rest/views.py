@@ -73,8 +73,8 @@ def api_list_sales(request, automobile_vo_id=None):
     else:
         content = json.loads(request.body)
         try:
-            automobile_vin = content["automobile"]
-            automobile = AutomobileVO.objects.get(import_vin=automobile_vin)
+            automobile_href = content["automobile"]
+            automobile = AutomobileVO.objects.get(import_href=automobile_href)
             content["automobile"] = automobile
         except AutomobileVO.DoesNotExist:
             return JsonResponse(

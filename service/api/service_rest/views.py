@@ -29,7 +29,7 @@ class AppointmentDetailEncoder(ModelEncoder):
         "finish",
         "reason",
     ]
-    encoders = {"technician": TechnicianListEncoder}
+    encoders = {"technician": TechnicianListEncoder()}
 
 
 @require_http_methods(["GET", "POST"])
@@ -69,12 +69,15 @@ def api_list_appointments(request):
 
         technician = Technician.objects.get(employee_number=content["technician"])
         content["technician"]=technician
+        
         try:
+                                   
             vin = AutomobileVO.objects.get(vin=content["vin"])
             content["vip"]=True
             content["vin"]=vin
         except AutomobileVO.DoesNotExist:
             content["vip"]=False
+
 
             
         appointment = Appointment.objects.create(**content)

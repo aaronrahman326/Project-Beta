@@ -3,9 +3,8 @@ from .models import AutomobileVO, Employees, Customers, Vehicles, Sales
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
-
 from common.json import ModelEncoder
-from .models import AutomobileVO, Sales, Employees, Customers, Vehicles
+
 # Create your views here.
 
 
@@ -13,20 +12,37 @@ class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
         "vin",
+        "color",
+        "import_href"
     ]
 
 
-class SalesEncoder(ModelEncoder):
-    model = Sales
+class EmployeeEncoder(ModelEncoder):
+    model = Employees
     properties = [
-    "vin",
-    "employee",
-    "customer",
-    "sale_price"
+        "name",
+        "employee_number"
     ]
 
-    def get_extra_data(self, o):
-        return {"automobile": o.automobile.name}
+
+class CustomerEncoder(ModelEncoder):
+    model = Customers
+    properties = [
+        "name",
+        "address",
+        "phone_number"
+    ]
+
+
+class VehicleEncoder(ModelEncoder):
+    model = Vehicles
+
+    properties = [
+        "model",
+        "color",
+        "year",
+        "picture_url"
+    ]
 
 
 class SalesDetailEncoder(ModelEncoder):
@@ -40,34 +56,31 @@ class SalesDetailEncoder(ModelEncoder):
     ]
 
     encoders = {
-        "automobile": AutomobileVOEncoder(),
+        "automobile": AutomobileVOEncoder,
+        "employee": EmployeeEncoder,
+        "customer": CustomerEncoder,
     }
 
+    def get_extra_data(self, o):
+        return {"automobiles": o.automobiles.name}
 
-class EmployeeEncoder(ModelEncoder):
-    model = Employees
+class SalesEncoder(ModelEncoder):
+    model = Sales
     properties = [
-        "name",
-        "employee_number"
+    "vin",
+    "employee",
+    "customer",
+    "sale_price"
     ]
 
-class CustomerEncoder(ModelEncoder):
-    model = Customers
-    properties = [
-        "name",
-        "address",
-        "phone_number"
-    ]
+    encoders = {
+        "automobile": AutomobileVOEncoder,
+        "employee": EmployeeEncoder,
+        "customer": CustomerEncoder,
+    }
 
-
-class VehicleEncoder(ModelEncoder):
-    model = Vehicles
-    properties = [
-        "model",
-        "color",
-        "year",
-        "picture_url"
-    ]
+    def get_extra_data(self, o):
+        return {"automobiles": o.automobiles.name}
 
 
 @require_http_methods(["GET", "POST"])
@@ -130,9 +143,9 @@ def api_list_sales(request, automobile_vo_id=None):
     else:
         content = json.loads(request.body)
         try:
-            automobile_href = content["automobile"]
-            automobile = AutomobileVO.objects.get(import_href=automobile_href)
-            content["automobile"] = automobile
+            vin = content["vin"]
+            vin = AutomobileVO.objects.get(vin=content["vin"])
+            content["vin"] = vin
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
                 {"ERROR": "TRY AGAIN BIG GUY"},

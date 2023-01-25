@@ -1,29 +1,48 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
+# from .models import Automobile
 # Create your models here.
 
 
 class AutomobileVO(models.Model):
-    vin = models.CharField(max_length=200, unique=True)
-    import_href = models.CharField(max_length=100, unique=True, null=True)
-    color = models.CharField(max_length=50, null=True)
-    year = models.PositiveSmallIntegerField(null=True)
+    # color = models.CharField(max_length=50)
+    # year = models.PositiveSmallIntegerField()
+    vin = models.CharField(max_length=17)
+
+    # color = models.ForeignKey(
+    #     AutomobileVO,
+    #     on_delete=models.CASCADE,
+    #     related_name="color",
+    #     null=True,
+    # )
+
+    # year = models.ForeignKey(
+    #     AutomobileVO,
+    #     on_delete=models.CASCADE,
+    #     related_name="year",
+    #     null=True,
+    # )
 
     def get_api_url(self):
         return reverse("api_automobile", kwargs={"vin": self.vin})
-
 
 
 class Employees(models.Model):
     name = models.CharField(max_length=200)
     employee_number = models.IntegerField(null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Customers(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     phone_number = models.BigIntegerField()
+
+    def __str__(self):
+        return self.name
 
 
 class Vehicles(models.Model):

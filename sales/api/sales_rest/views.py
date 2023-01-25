@@ -20,6 +20,7 @@ class AutomobileVOEncoder(ModelEncoder):
 class EmployeeEncoder(ModelEncoder):
     model = Employees
     properties = [
+        "id",
         "name",
         "employee_number"
     ]
@@ -90,6 +91,7 @@ def api_list_employees(request):
         employees = Employees.objects.all()
         return JsonResponse(
             {"employees":employees},
+            # print(AutomobileVO)
             encoder = EmployeeEncoder)
     else:
         content = json.loads(request.body)
@@ -131,31 +133,36 @@ def api_list_customers(request):
 
 
 @require_http_methods(["GET", "POST"])
-def api_list_sales(request, automobile_vo_id=None):
+def api_list_sales(request):
+
     if request.method == "GET":
-        if automobile_vo_id is not None:
-            sales = Sales.objects.filter(automobile=automobile_vo_id)
-        else:
-            sales = Sales.objects.all()
+        sales = Sales.objects.all()
         return JsonResponse(
             {"sales":sales},
-            encoder=SalesEncoder
+            encoder=SalesDetailEncoder
         )
     else:
         content = json.loads(request.body)
-        try:
-            automobile_href = content["automobile"]
-            automobile = AutomobileVO.objects.get(import_href=automobile_href)
-            content["automobile"] = automobile
-        except AutomobileVO.DoesNotExist:
-            return JsonResponse(
-                {"ERROR": "TRY AGAIN BIG GUY"},
-                status=400
-            )
+        employee = Employees.objects.filter(name=content["employee"])
+        content["employee"] = employee
+        automobiles = AutomobileVO.objects.all()
+        for auto in automobiles:
+            print(auto.__dict__)
 
-        automobile = Sales.objects.create(**content)
+        # try:
+        automobile_href = content["vin"]
+        automobile = AutomobileVO.objects.get(vin=automobile_href)
+        content["vin"] = automobile
+
+# except AutomobileVO.DoesNotExist:
+#     return JsonResponse(
+#         {"ERROR": "TRY AGAIN BIG GUY"},
+#         status=400
+#     )
+
+        sales = Sales.objects.create(**content)
         return JsonResponse(
-            automobile,
+            sales,
             encoder=SalesDetailEncoder,
             safe=False,
         )

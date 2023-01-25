@@ -1,14 +1,17 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
+# from django import forms
+
 # from .models import Automobile
 # Create your models here.
 
 
 class AutomobileVO(models.Model):
-    # color = models.CharField(max_length=50)
-    # year = models.PositiveSmallIntegerField()
+    color = models.CharField(max_length=50, null=True)
+    year = models.PositiveSmallIntegerField(null=True)
     vin = models.CharField(max_length=17)
+    import_href = models.CharField(max_length=255, null=True)
 
     # color = models.ForeignKey(
     #     AutomobileVO,
@@ -34,6 +37,8 @@ class Employees(models.Model):
 
     def __str__(self):
         return self.name
+    def get_api_url(self):
+        return reverse("api_list_employee", kwargs={"pk": self.id})
 
 
 class Customers(models.Model):
@@ -79,3 +84,9 @@ class Sales(models.Model):
 
     def get_api_url(self):
         return reverse("api_show_sale", kwargs={"pk": self.pk})
+
+
+# class SaleForm(forms.Form):
+#     sales_person = forms.
+#     class Meta:
+#         model = Sales

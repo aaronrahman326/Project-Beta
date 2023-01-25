@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 
-function EmployeeForm() {
+function CustomerForm() {
     const [formData, setFormData] = useState({
         name: '',
-        employee_number: '',
+        address: '',
+        phone_number: ''
     })
 
     const [hasSignedUp, setHasSignedUp] = useState(false)
@@ -12,7 +13,7 @@ function EmployeeForm() {
         e.preventDefault();
         console.log(formData);
 
-        const EmployeeUrl = "http://localhost:8090/api/employees/";
+        const CustomerUrl = "http://localhost:8090/api/customers/";
         const fetchConfig = {
             method: 'POST',
             body: JSON.stringify(formData),
@@ -20,12 +21,13 @@ function EmployeeForm() {
                 'Content-Type': 'application/json',
             },
         };
-        const response = await fetch(EmployeeUrl, fetchConfig);
+        const response = await fetch(CustomerUrl, fetchConfig);
 
         if (response.ok) {
         setFormData({
             name: '',
-            employee_number: '',
+            address: '',
+            phone_number: ''
         })
         setHasSignedUp(true);
         // alert("Welcome to your first day!")
@@ -51,17 +53,21 @@ function EmployeeForm() {
         <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
-            <h1>Create A New Employee</h1>
-            <form onSubmit={ handleSubmit } id="create-employee-form">
+            <h1>Create A New Customer</h1>
+            <form onSubmit={ handleSubmit } id="create-customer-form">
               <div className="form-floating mb-3">
-                <input onChange={ handleChange } value={formData.name} placeholder="Employee Name" required type="text" name="name" id="employee_name" className="form-control"/>
-                <label htmlFor="employee_name">Employee Name</label>
+                <input onChange={ handleChange } value={formData.name} placeholder="Name" required type="text" name="name" id="customer_name" className="form-control"/>
+                <label htmlFor="customer_name">Name</label>
               </div>
               <div className="form-floating mb-3">
-                <input onChange={ handleChange } value={formData.employee_number} placeholder="Employee Number" required type="text" name="employee_number" id="employee_number" className="form-control"/>
-                <label htmlFor="employee_number">Employee Number</label>
+                <input onChange={ handleChange } value={formData.customer_address} placeholder=" Customer Address" required type="text" name="address" id="customer_address" className="form-control"/>
+                <label htmlFor="customer_address">Address</label>
               </div>
-              <button className="btn btn-primary">Sell your soul to the machine</button>
+              <div className="form-floating mb-3">
+                <input onChange={ handleChange } value={formData.customer_phone_number} placeholder=" Customer Phone Number" required type="text" name="phone_number" id="customer_phone_number" className="form-control"/>
+                <label htmlFor="customer_phone_number">Phone Number</label>
+              </div>
+              <button className="btn btn-primary">Join Now!</button>
             </form>
             <div className={messageClasses} id="success-message">
             Congratulations! You're now bound by all terms and conditions!
@@ -72,4 +78,4 @@ function EmployeeForm() {
     );
 }
 
-export default EmployeeForm;
+export default CustomerForm;

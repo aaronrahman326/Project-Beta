@@ -83,6 +83,7 @@ class SalesEncoder(ModelEncoder):
         return {"automobiles": o.automobiles.name}
 
 
+
 @require_http_methods(["GET", "POST"])
 def api_list_employees(request):
     if request.method == "GET":
@@ -143,9 +144,9 @@ def api_list_sales(request, automobile_vo_id=None):
     else:
         content = json.loads(request.body)
         try:
-            vin = content["vin"]
-            vin = AutomobileVO.objects.get(vin=content["vin"])
-            content["vin"] = vin
+            automobile_href = content["automobile"]
+            automobile = AutomobileVO.objects.get(import_href=automobile_href)
+            content["automobile"] = automobile
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
                 {"ERROR": "TRY AGAIN BIG GUY"},

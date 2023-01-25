@@ -16,40 +16,13 @@ class AutomobileVOEncoder(ModelEncoder):
     ]
 
 
-class SalesEncoder(ModelEncoder):
-    model = Sales
-    properties = [
-    "vin",
-    "employee",
-    "customer",
-    "sale_price"
-    ]
-
-    def get_extra_data(self, o):
-        return {"automobile": o.automobile.name}
-
-
-class SalesDetailEncoder(ModelEncoder):
-    model = Sales
-    properties = [
-    "vin",
-    "employee",
-    "customer",
-    "sale_price",
-    "picture_url"
-    ]
-
-    encoders = {
-        "automobile": AutomobileVOEncoder(),
-    }
-
-
 class EmployeeEncoder(ModelEncoder):
     model = Employees
     properties = [
         "name",
         "employee_number"
     ]
+
 
 class CustomerEncoder(ModelEncoder):
     model = Customers
@@ -68,6 +41,36 @@ class VehicleEncoder(ModelEncoder):
         "year",
         "picture_url"
     ]
+
+
+class SalesDetailEncoder(ModelEncoder):
+    model = Sales
+    properties = [
+    "vin",
+    "employee",
+    "customer",
+    "sale_price",
+    "picture_url"
+    ]
+
+    encoders = {
+        "automobile": AutomobileVOEncoder(),
+        "employee": EmployeeEncoder(),
+        "customer": CustomerEncoder(),
+    }
+
+
+class SalesEncoder(ModelEncoder):
+    model = Sales
+    properties = [
+    "vin",
+    "employee",
+    "customer",
+    "sale_price"
+    ]
+
+    def get_extra_data(self, o):
+        return {"automobiles": o.automobiles.name}
 
 
 @require_http_methods(["GET", "POST"])
@@ -130,9 +133,9 @@ def api_list_sales(request, automobile_vo_id=None):
     else:
         content = json.loads(request.body)
         try:
-            automobile_href = content["automobile"]
+            automobile_href = content["automobiles"]
             automobile = AutomobileVO.objects.get(import_href=automobile_href)
-            content["automobile"] = automobile
+            content["automobiles"] = automobile
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
                 {"ERROR": "TRY AGAIN BIG GUY"},

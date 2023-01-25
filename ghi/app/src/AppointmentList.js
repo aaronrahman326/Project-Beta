@@ -1,21 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
+// function AppointmentList() {
+//     const [appointments, setAppointments] = useState([])
+
+//     const getData = async () => {
+//         const response = await fetch( "http://localhost:8080/api/appointments/" )
+
+//         // const data = await response.json();
+//         // const filteredData = data.appointments.filter(
+//         //     appointment => appointment.finished === false
+//         // )
+//         // setAppointments(filteredData)
+//         if(response.ok){
+//             const data = await response.json();
+//             setAppointments(data.appointments)
+//         }
+//     }
+//     useEffect(() => {
+//         getData()
+//     }, [])
 function AppointmentList() {
     const [appointments, setAppointments] = useState([])
-
-    const fetchData = async () => {
-        const response = await fetch( "http://localhost:8080/api/appointments/" )
-
+  
+    const getData = async () => {
+      const response = await fetch('http://localhost:8080/api/appointments/');
+  
+      if (response.ok) {
         const data = await response.json();
-        const filteredData = data.appointments.filter(
-            appointment => appointment.finished === false
-        )
-        setAppointments(filteredData)
+        setAppointments(data.appointments)
+      }
     }
-    useEffect(() => {
-        fetchData()
+  
+    useEffect(()=>{
+      getData()
     }, [])
-
+    
     const deleteAppointment =  (id) => {
         fetch(`http://localhost:8080/api/appointments/${id}`, {
             method: 'delete',
@@ -37,8 +56,9 @@ function AppointmentList() {
             }   
         }
     }    
-
+    console.log(appointments)
     return (
+        <>
         <table className="table table-striped">
         <thead>
           <tr>
@@ -57,10 +77,11 @@ function AppointmentList() {
               <tr key={ appointment.id }>
                 <td>{ appointment.customer_name }</td>
                 { appointment.vip && <td>VIP</td> }
-                { !appointment.vip && <td>""</td>}
+                { !appointment.vip && <td></td>}
+                <td>{ appointment.vin }</td>
                 <td>{ appointment.start_date }</td>
                 <td>{ appointment.start_time }</td>
-                <td>{ appointment.technician }</td>
+                <td>{ appointment.technician.name }</td>
                 <td>{ appointment.reason }</td>
                 <td><button onClick={() => deleteAppointment(appointment.id)} className="btn btn-primary" type="button" >Delete this!</button></td>
                 <td><button onClick={() => updateStatus(appointment.id)} className="btn btn-primary" type="button" >Finished</button></td>
@@ -69,6 +90,7 @@ function AppointmentList() {
           })}
         </tbody>
       </table>
+      </>
     );
   }
   

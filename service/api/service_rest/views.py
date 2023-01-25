@@ -28,6 +28,8 @@ class AppointmentDetailEncoder(ModelEncoder):
         "start_time",
         "finish",
         "reason",
+        "vin",
+        
     ]
     encoders = {"technician": TechnicianListEncoder()}
 
@@ -78,8 +80,6 @@ def api_list_appointments(request):
         except AutomobileVO.DoesNotExist:
             content["vip"]=False
 
-
-            
         appointment = Appointment.objects.create(**content)
 
         return JsonResponse(

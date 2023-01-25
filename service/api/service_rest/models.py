@@ -7,7 +7,7 @@ class AutomobileVO(models.Model):
     import_href = models.CharField(max_length=100, null=True, unique=True)
     color = models.CharField(max_length=50, null=True)
     year = models.PositiveSmallIntegerField(null=True)
-    vin = models.CharField(max_length=17, unique=True)
+    vin = models.CharField(max_length=20, unique=True)
 
     def get_api_url(self):
         return reverse("api_automobile", kwargs={"vin": self.vin})
@@ -23,9 +23,9 @@ class Technician(models.Model):
 
 
 class Appointment(models.Model):
-    vin = models.CharField(max_length=17, unique=True)
+    vin = models.CharField(max_length=100)
     vip = models.BooleanField(default=False)
-    customer_name = models.CharField(max_length=200, null=True, unique=True)
+    customer_name = models.CharField(max_length=200, null=True)
     start_date = models.DateField(null=True)
     start_time = models.TimeField(null=True)
     finish = models.BooleanField(default=False)

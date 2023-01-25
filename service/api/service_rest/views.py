@@ -21,6 +21,7 @@ class AppointmentDetailEncoder(ModelEncoder):
     model= Appointment
     properties = [
         "id",
+        "vip",
         "customer_name",
         "technician",
         "start_date",
@@ -75,10 +76,11 @@ def api_list_appointments(request):
         except AutomobileVO.DoesNotExist:
             content["vip"]=False
 
-            appointments = Appointment.objects.create(**content)
+            
+        appointment = Appointment.objects.create(**content)
 
         return JsonResponse(
-            appointments,
+            appointment,
             encoder = AppointmentDetailEncoder,
             safe=False
         )

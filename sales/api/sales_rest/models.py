@@ -55,6 +55,7 @@ class Vehicles(models.Model):
 
 
 class Sales(models.Model):
+    # name = models.CharField(max_length=200, null=True)
     vehicle = models.ForeignKey(
         AutomobileVO,
         on_delete=models.CASCADE,
@@ -78,10 +79,10 @@ class Sales(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
-    sale_price = models.DecimalField(max_digits=15, decimal_places=2)
+    sale_price = models.BigIntegerField()
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
     def get_api_url(self):
         return reverse("api_show_sale", kwargs={"pk": self.pk})

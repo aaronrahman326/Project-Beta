@@ -41,6 +41,7 @@ class VehicleEncoder(ModelEncoder):
 
     properties = [
         "model",
+        # "vin",
         "color",
         "year",
         "picture_url"
@@ -50,6 +51,7 @@ class VehicleEncoder(ModelEncoder):
 class SalesDetailEncoder(ModelEncoder):
     model = Sales
     properties = [
+    # "name",
     "vehicle",
     "employee",
     "customer",
@@ -69,6 +71,7 @@ class SalesDetailEncoder(ModelEncoder):
 class SalesEncoder(ModelEncoder):
     model = Sales
     properties = [
+    # "name",
     "vehicle",
     "employee",
     "customer",

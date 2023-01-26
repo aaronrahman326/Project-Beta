@@ -16,8 +16,8 @@ function EmployeeList() {
     getData()
   }, [])
 
-  const deleteEmployee = async (name) => {
-    fetch(`http://localhost:8080/api/shoes/${name}`, {
+  const deleteEmployee = async (id) => {
+    fetch(`http://localhost:8080/api/employees/${id}`, {
         method: 'delete',
         headers: {
             'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ function EmployeeList() {
       <tbody>
         {employees.map(employee => {
           return (
-            <tr key={ employee.href }>
+            <tr key={ employee.id }>
               <td>{ employee.name }</td>
               <td>{ employee.employee_number }</td>
               <td><button className="btn btn-primary" onClick={() => deleteEmployee(employee.name)} type="button">Delete</button></td>

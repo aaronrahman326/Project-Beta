@@ -16,8 +16,8 @@ function CustomerList() {
     getData()
   }, [])
 
-  const deleteCustomer = async (name) => {
-    fetch(`http://localhost:8080/api/customers/${name}`, {
+  const deleteCustomer = async (id) => {
+    fetch(`http://localhost:8080/api/customers/${id}`, {
         method: 'delete',
         headers: {
             'Content-Type': 'application/json'
@@ -39,11 +39,11 @@ function CustomerList() {
       <tbody>
         {customers.map(customer => {
           return (
-            <tr key={ customer.href }>
+            <tr key={ customer.id }>
               <td>{ customer.name }</td>
               <td>{ customer.address }</td>
               <td>{ customer.phone_number }</td>
-              <td><button className="btn btn-primary" onClick={() => deleteCustomer(customer.name)} type="button">Delete</button></td>
+              <td><button className="btn btn-primary" onClick={() => deleteCustomer(customer.id)} type="button">Delete</button></td>
             </tr>
           );
         })}

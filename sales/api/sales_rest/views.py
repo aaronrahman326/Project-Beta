@@ -136,6 +136,12 @@ def api_list_customers(request):
             )
 
 
+@require_http_methods(["DELETE"])
+def api_delete_employees(request, id):
+    sale = Sales.objects.get(id)
+    sale.delete()
+
+
 @require_http_methods(["GET", "POST"])
 def api_list_sales(request):
 

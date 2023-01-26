@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
 // import AppointmentList from './AppointmentList';
-import TechnicianForm from './TechnicianForm';
+// import TechnicianForm from './TechnicianForm';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
 import EmployeeForm from './EmployeeForm';
@@ -24,7 +24,7 @@ function App() {
           {/* { <Route path="technicians/new/" element={<TechnicianForm />} /> } */}
           <Route path="sales">
             <Route index element={<SalesList />} />
-            {/* <Route path="new" element={<SalesForm />} /> */}
+            <Route path="new" element={<SalesForm />} />
           </Route>
           <Route path="employees">
             <Route index element={<EmployeeList />} />

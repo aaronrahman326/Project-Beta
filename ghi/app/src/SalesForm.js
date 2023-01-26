@@ -1,30 +1,31 @@
 import React, {useState, useEffect} from 'react';
 
-function SaleForm() {
+function SalesForm() {
     const [formData, setFormData] = useState({
-        vehicle: '',
+        automobiles: '',
         employee: '',
         customer: '',
         sale_price: ''
     })
 
     const [hasPurchased, setHasPurchased] = useState(false)
-    // const [vehicles, setVehicles] = useState([])
+    const [automobiles, setAutomobiles] = useState([])
 
 
-    //     const getData = async () => {
-    //     const url = 'http://localhost:8090/api/vehicles'
-    //     const response = await fetch(url)
+    // const getData = async () => {
+    //   // const url = `http://localhost:8100${automobiles.href}`
+    //   const automobileUrl = "http://localhost:8100/api/automobiles/"
+    //   const automobileResponse = await fetch(automobileUrl)
 
-    //         if (response.ok) {
-    //             const data = await response.json()
-    //             setVehicles(data.vehicles)
-    //         }
-    //     }
+    //       if (automobileResponse.ok) {
+    //           const automobileData = await automobileResponse.json()
+    //           setAutomobiles(automobileData.automobiles)
+    //       }
+    //   }
 
-    // useEffect(() => {
+    //   useEffect(() => {
     //     getData();
-    // }, []);
+    //   }, []);
 
 
         const handleSubmit = async (e) => {
@@ -32,6 +33,7 @@ function SaleForm() {
         console.log(formData);
 
         const SaleUrl = "http://localhost:8090/api/sales/";
+
         const fetchConfig = {
             method: 'POST',
             body: JSON.stringify(formData),
@@ -43,7 +45,7 @@ function SaleForm() {
 
         if (response.ok) {
         setFormData({
-            vehicle: '',
+            automobiles: '',
             employee: '',
             customer: '',
             sale_price: ''
@@ -53,9 +55,22 @@ function SaleForm() {
         }
     }
 
-    // useEffect(() => {
-    //     getData();
-    // }, []);
+    const getData = async () => {
+      // const url = `http://localhost:8100${automobiles.href}`
+      const automobileUrl = "http://localhost:8100/api/automobiles/"
+      const automobileResponse = await fetch(automobileUrl)
+
+          if (automobileResponse.ok) {
+              const automobileData = await automobileResponse.json()
+              setAutomobiles(automobileData.automobiles)
+          }
+      }
+
+      useEffect(() => {
+        getData();
+      }, []);
+    // }
+// }
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -75,14 +90,14 @@ function SaleForm() {
             <h1>Record a new sale</h1>
             <form onSubmit={ handleSubmit } id="create-sale-form">
             <div className="mb-3">
-              {/* <select onChange={handleChange} value={formData.vehicle} required name="vehicle" id="vehicle" className="form-select">
+              <select onChange={handleChange} value={formData.vehicle} required name="vehicle" id="vehicle" className="form-select">
                 <option value="">Choose a vehicle</option>
-                {vehicles.map(vehicle => {
+                {automobiles.map(automobile => {
                   return (
-                    <option key={vehicle.id} value={vehicle.id}>{vehicle.model}</option>
+                    <option key={automobile.vin} value={automobile.vin}>{automobile.vin}</option>
                   )
                 })}
-              </select> */}
+              </select>
             </div>
               <div className="form-floating mb-3">
                 <input onChange={ handleChange } value={formData.customer_address} placeholder=" Customer Address" required type="text" name="address" id="customer_address" className="form-control"/>
@@ -103,4 +118,4 @@ function SaleForm() {
     );
 }
 
-export default SaleForm;
+export default SalesForm;

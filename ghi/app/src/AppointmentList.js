@@ -4,46 +4,48 @@ function AppointmentList() {
     const [appointments, setAppointments] = useState([])
   
     const getData = async () => {
-      const response = await fetch('http://localhost:8080/api/appointments/');
+        const response = await fetch('http://localhost:8080/api/appointments/');
   
-      if (response.ok) {
-        const data = await response.json();
-        setAppointments(data.appointments)
-      }
+        if (response.ok) {
+            const data = await response.json();
+            const filteredData = data.appointments.filter(appointment => appointment.finish === false)
+            setAppointments(filteredData)
+        }
     }
   
     useEffect(()=>{
       getData()
     }, [])
     
-    const deleteAppointment =  (id) => {
-        fetch(`http://localhost:8080/api/appointments/${id}`, {
+    const deleteAppointment =  async (id) => {
+        const deleteAppointmentUrl = `http://localhost:8080/api/appointments/${id}`
+        const config = {
             method: 'delete',
             headers: {
                 'Content-Type' : 'application/json'
             }
-        }).then(() => { 
-            window.location.reload()
+        }
+        const response = await fetch(deleteAppointmentUrl, config)
+
+        if (response.ok) {
             getData()
-        })
+        }
     }
 
     const updateAppointment = async (id) => {
         const appointmentUrl = `http://localhost:8080/api/appointments/${id}/`
         const fetchConfig = {
-          method: "put",
-          body: JSON.stringify({
-            finish: 'True',
-          }),
-          headers: {
-            "Content-Type": "application/json"
-          }
-
+            method: "put",
+            body: JSON.stringify({
+                finish: 'True',
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
         }
         const response = await fetch(appointmentUrl, fetchConfig)
     
         if (response.ok) {
-            window.location.reload()
             getData();
         }
     }
@@ -51,7 +53,6 @@ function AppointmentList() {
     const handleClick = id => {
         updateAppointment(id)
     }
-    
        
     console.log(appointments)
     return (
@@ -71,19 +72,17 @@ function AppointmentList() {
         <tbody>
           {appointments.map(appointment => {
             return (
-              <tr key={ appointment.id }>
-                <td>{ appointment.customer_name }</td>
-                { appointment.vip && <td>VIP</td> }
-                { !appointment.vip && <td></td>}
-                <td>{ appointment.vin }</td>
-                <td>{ appointment.start_date }</td>
-                <td>{ appointment.start_time }</td>
-                <td>{ appointment.technician.name }</td>
-                <td>{ appointment.reason }</td>
-                { appointment.finished && <td>Finished</td>}
-                { !appointment.finished && <td><button onClick={() => deleteAppointment(appointment.id)} className="btn btn-primary" type="button" >Delete this!</button></td>}
-                { !appointment.finished && <td><button onClick={() => handleClick(appointment.id)} className="btn btn-success" type="button" >Finished</button></td>}
-                    
+                <tr key={ appointment.id }>
+                    <td>{ appointment.customer_name }</td>
+                    { appointment.vip && <td>VIP</td> }
+                    { !appointment.vip && <td></td>}
+                    <td>{ appointment.vin }</td>
+                    <td>{ appointment.start_date }</td>
+                    <td>{ appointment.start_time }</td>
+                    <td>{ appointment.technician.name }</td>
+                    <td>{ appointment.reason }</td>
+                    <td><button onClick={() => deleteAppointment(appointment.id)} className="btn btn-primary" type="button" >Delete this!</button></td>
+                    <td><button onClick={() => handleClick(appointment.id)} className="btn btn-success" type="button" >Finished</button></td>
                 </tr>
             );
           })}

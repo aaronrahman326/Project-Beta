@@ -12,72 +12,54 @@ function SalesForm() {
     const [automobiles, setAutomobiles] = useState([])
 
 
-    // const getData = async () => {
-    //   // const url = `http://localhost:8100${automobiles.href}`
-    //   const automobileUrl = "http://localhost:8100/api/automobiles/"
-    //   const automobileResponse = await fetch(automobileUrl)
-
-    //       if (automobileResponse.ok) {
-    //           const automobileData = await automobileResponse.json()
-    //           setAutomobiles(automobileData.automobiles)
-    //       }
-    //   }
-
-    //   useEffect(() => {
-    //     getData();
-    //   }, []);
-
-
-        const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(formData);
-
-        const SaleUrl = "http://localhost:8090/api/sales/";
-
-        const fetchConfig = {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
-        const response = await fetch(SaleUrl, fetchConfig);
-
-        if (response.ok) {
-        setFormData({
-            automobiles: '',
-            employee: '',
-            customer: '',
-            sale_price: ''
-        })
-        setHasPurchased(true);
-        // alert("Welcome to your first day!")
-        }
-    }
-
-    const getData = async () => {
-      // const url = `http://localhost:8100${automobiles.href}`
+    const fetchAutomobileData = async () => {
+      // const url = `http://localhost:8100${automobiles.id}`
       const automobileUrl = "http://localhost:8100/api/automobiles/"
       const automobileResponse = await fetch(automobileUrl)
 
-          if (automobileResponse.ok) {
-              const automobileData = await automobileResponse.json()
-              setAutomobiles(automobileData.automobiles)
-          }
+      if (automobileResponse.ok) {
+        const automobileData = await automobileResponse.json()
+        setAutomobiles(automobileData.automobiles)
       }
+    }
+    useEffect(() => {
+      fetchAutomobileData();
+    }, []);
 
-      useEffect(() => {
-        getData();
-      }, []);
-    // }
-// }
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log(formData);
+
+      const SaleUrl = "http://localhost:8090/api/sales/";
+      const fetchConfig = {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      const response = await fetch(SaleUrl, fetchConfig);
+
+      if (response.ok) {
+      setFormData({
+        automobiles: '',
+        employee: '',
+        customer: '',
+        sale_price: ''
+      })
+      setHasPurchased(true);
+        // alert("Welcome to your first day!")
+      }
+    }
+
 
     const handleChange = (e) => {
         const value = e.target.value;
-        const inputType = e.target.name;
+        // const inputType = e.target.name;
         setFormData({
           ...formData,
-          [inputType]: value,
+          [e.target.value]: value,
         });
     };
 
@@ -90,8 +72,8 @@ function SalesForm() {
             <h1>Record a new sale</h1>
             <form onSubmit={ handleSubmit } id="create-sale-form">
             <div className="mb-3">
-              <select onChange={handleChange} value={formData.vehicle} required name="vehicle" id="vehicle" className="form-select">
-                <option value="">Choose a vehicle</option>
+              <select onChange={handleChange} value={formData.automobiles} required name="automobiles" id="automobiles" className="form-select">
+                <option value="">Choose an automobile</option>
                 {automobiles.map(automobile => {
                   return (
                     <option key={automobile.vin} value={automobile.vin}>{automobile.vin}</option>

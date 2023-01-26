@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 // import Nav from 'react-bootstrap/Nav';
 // import Navbar from 'react-bootstrap/Navbar';
 // import NavDropdown from 'react-bootstrap/NavDropdown';
+<<<<<<< HEAD
+=======
 //import Dropdown from 'react-bootstrap/Dropdown';
 
 // function Nav() {
@@ -55,6 +57,7 @@ import { NavLink } from 'react-router-dom';
 
 // export default Nav;
 
+>>>>>>> b3554156f475fa9606c8eea00e30d8ed33c26933
 
 function Nav() {
   return (

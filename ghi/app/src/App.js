@@ -10,11 +10,6 @@ import EmployeeForm from './EmployeeForm';
 import EmployeeList from './EmployeeList';
 import SalesForm from './SalesForm';
 import SalesList from './SalesList';
-import AppointmentForm from './AppointmentForm';
-
-
-
-
 
 function App() {
   return (

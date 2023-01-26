@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 
-function AppointmentForm() {
-    const [technicians, setTechnicians] = useState([]);
+function SaleForm() {
+    const [, setTechnicians] = useState([]);
 
     const [formData, setFormData] = useState({
         customer_name: "",

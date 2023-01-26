@@ -121,6 +121,7 @@ function AppointmentForm() {
             <button
               onClick={() => setHasSignedUp(false)}
               className='btn btn-primary'>
+              Set Another Appointment?  
             </button>
           </div>
         </div>

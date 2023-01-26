@@ -181,7 +181,7 @@ def api_list_sales(request):
 def api_show_sale(request, pk):
     if request.method == "GET":
         try:
-            sale = Sales.objects.get(id=pk)
+            sales = Sales.objects.get(id=pk)
             return JsonResponse(
                 sale,
                 encoder=SalesDetailEncoder,
@@ -214,7 +214,7 @@ def api_show_sale(request, pk):
             return JsonResponse(
                 {"message": "SALE DELETED"},
                 sale,
-                encoder=Sales,
+                encoder=SalesDetailEncoder,
                 safe=False,
             )
         except Sales.DoesNotExist:

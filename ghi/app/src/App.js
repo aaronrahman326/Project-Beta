@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import AppointmentList from './AppointmentList';
+// import AppointmentList from './AppointmentList';
 import TechnicianForm from './TechnicianForm';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
@@ -34,9 +34,9 @@ function App() {
             <Route index element={<CustomerList />} />
             <Route path="new" element={<CustomerForm />} />
           </Route >
-          <Route path="appointments">
+          {/* <Route path="appointments">
             <Route index element={<AppointmentList />} />
-          </Route>
+          </Route> */}
         </Routes>
       </div>
     </BrowserRouter>

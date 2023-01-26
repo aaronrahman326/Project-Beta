@@ -16,8 +16,8 @@ function SaleList() {
     getData()
   }, [])
 
-  const deleteSale = async (name) => {
-    fetch(`http://localhost:8080/api/sales/${name}`, {
+  const deleteSale = async (href) => {
+    fetch(`http://localhost:8080${href}`, {
         method: 'delete',
         headers: {
             'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ function SaleList() {
               <td>{ sale.customer.name }</td>
               <td>{ sale.vehicle.vin }</td>
               <td>{ sale.sale_price }</td>
-              <td><button className="btn btn-primary" onClick={() => deleteSale(sale.name)} type="button">Delete</button></td>
+              <td><button className="btn btn-primary" onClick={() => deleteSale(sale.href)} type="button">Delete</button></td>
             </tr>
           );
         })}

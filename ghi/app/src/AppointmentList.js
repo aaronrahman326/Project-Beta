@@ -23,28 +23,35 @@ function AppointmentList() {
                 'Content-Type': 'application/json'
             }
         }).then(() => { 
-        //   window.location.reload()
+            window.location.reload()
             getData()
         })
     }
 
-    const updateAppointment = (id) => {
-        const url=`http://localhost:8080/api/appointments/${id}/`
+    const updateAppointment = async (id) => {
+        const appointmentUrl = `http://localhost:8080/api/appointments/${id}/`
         const fetchConfig = {
-          method: "PUT",
-          body: JSON.stringify(
-            finished: True,
-         ),
+          method: "put",
+          body: JSON.stringify({
+            finish: 'True',
+          }),
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           }
-        }   
-        const response = fetch(url, fetchConfig)
-        // if (response.ok) {
-        //     const handleClick = id => {
-        //     updateAppointment(id);
-        // }}
+
+        }
+        const response = await fetch(appointmentUrl, fetchConfig)
+    
+        if (response.ok) {
+            window.location.reload()
+            getData();
+        }
     }
+    
+    const handleClick = id => {
+        updateAppointment(id)
+    }
+    
        
     console.log(appointments)
     return (
@@ -73,9 +80,11 @@ function AppointmentList() {
                 <td>{ appointment.start_time }</td>
                 <td>{ appointment.technician.name }</td>
                 <td>{ appointment.reason }</td>
-                <td><button onClick={() => deleteAppointment(appointment.id)} className="btn btn-primary" type="button" >Delete this!</button></td>
-                <td><button onClick={() => updateAppointment(appointment.id)} className="btn btn-success" type="button" >Finished</button></td>
-              </tr>
+                { appointment.finished && <td>Finished</td>}
+                { !appointment.finished && <td><button onClick={() => deleteAppointment(appointment.id)} className="btn btn-primary" type="button" >Delete this!</button></td>}
+                { !appointment.finished && <td><button onClick={() => handleClick(appointment.id)} className="btn btn-success" type="button" >Finished</button></td>}
+                    
+                </tr>
             );
           })}
         </tbody>

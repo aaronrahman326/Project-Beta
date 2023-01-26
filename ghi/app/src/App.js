@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-// import AppointmentList from './AppointmentList';
-// import TechnicianForm from './TechnicianForm';
+import AppointmentList from './AppointmentList';
+import TechnicianForm from './TechnicianForm';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
 import EmployeeForm from './EmployeeForm';
@@ -20,8 +20,8 @@ function App() {
       <Nav />
       <div className="container">
       <Routes>
-          { <Route path="/" element={<MainPage />} /> }
-          {/* { <Route path="technicians/new/" element={<TechnicianForm />} /> } */}
+          <Route path="/" element={<MainPage />} />
+          <Route path="technicians/new/" element={<TechnicianForm />} />
           <Route path="sales">
             <Route index element={<SalesList />} />
             <Route path="new" element={<SalesForm />} />
@@ -34,9 +34,10 @@ function App() {
             <Route index element={<CustomerList />} />
             <Route path="new" element={<CustomerForm />} />
           </Route >
-          {/* <Route path="appointments">
+          <Route path="appointments">
             <Route index element={<AppointmentList />} />
-          </Route> */}
+            <Route path="new" element={<AppointmentForm />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

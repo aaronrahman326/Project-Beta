@@ -11,7 +11,7 @@ function SalesForm() {
         sale_price: ''
   })
 
-    // const [hasSignedUp, setHasSignedUp] = useState(false)
+    const [hasSignedUp, setHasSignedUp] = useState(false)
 
     const fetchAutomobilesData = async () => {
         const automobilesUrl="http://localhost:8100/api/automobiles/"
@@ -46,7 +46,7 @@ function SalesForm() {
             customer: '',
             sale_price: ''
         });
-        // setHasSignedUp(true)
+        setHasSignedUp(true)
         }
     };
 
@@ -72,12 +72,11 @@ function SalesForm() {
     <div className='row'>
       <div className='offset-3 col-6'>
         <div className='shadow p-4 mt-4'>
-          <h1>Create a new appointment</h1>
+          <h1>Create a new sale</h1>
           <form
             onSubmit={handleSubmit}
             id='create-appointment-form'
-            className={formClasses}
-          >
+            className={formClasses}>
             <div className="form-floating mb-3">
               <input onChange={handleChange} value={formData.customer_name} placeholder='Customer Name' required name='customer_name' id='name' className='form-control' />
               <label htmlFor='customer_name'>Name</label>

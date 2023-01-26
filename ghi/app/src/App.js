@@ -8,6 +8,8 @@ import CustomerList from './CustomerList';
 import EmployeeForm from './EmployeeForm';
 import EmployeeList from './EmployeeList';
 import SalesForm from './SalesForm';
+import SalesList from './SalesList';
+
 
 
 
@@ -18,16 +20,20 @@ function App() {
       <Nav />
       <div className="container">
       <Routes>
-          {/* { <Route path="/" element={<MainPage />} /> }
-          { <Route path="technicians/new/" element={<TechnicianForm />} /> }
+          { <Route path="/" element={<MainPage />} /> }
+          {/* { <Route path="technicians/new/" element={<TechnicianForm />} /> } */}
+          <Route path="sales">
+            <Route index element={<SalesList />} />
+            {/* <Route path="new" element={<SalesForm />} /> */}
+          </Route>
           <Route path="employees">
             <Route index element={<EmployeeList />} />
             <Route path="new" element={<EmployeeForm />} />
           </Route>
           <Route path="customers">
             <Route index element={<CustomerList />} />
-            <Route path="new" element={<CustomerForm />} /> 
-          </Route > */}
+            <Route path="new" element={<CustomerForm />} />
+          </Route >
           <Route path="appointments">
             <Route index element={<AppointmentList />} />
           </Route>

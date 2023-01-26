@@ -29,6 +29,7 @@ class EmployeeEncoder(ModelEncoder):
 class CustomerEncoder(ModelEncoder):
     model = Customers
     properties = [
+        "id",
         "name",
         "address",
         "phone_number"
@@ -49,39 +50,39 @@ class VehicleEncoder(ModelEncoder):
 class SalesDetailEncoder(ModelEncoder):
     model = Sales
     properties = [
-    "vin",
+    "vehicle",
     "employee",
     "customer",
     "sale_price",
-    "picture_url"
+    # "picture_url"
     ]
 
     encoders = {
-        "automobile": AutomobileVOEncoder,
-        "employee": EmployeeEncoder,
-        "customer": CustomerEncoder,
+        "vehicle": AutomobileVOEncoder(),
+        "employee": EmployeeEncoder(),
+        "customer": CustomerEncoder(),
     }
 
-    def get_extra_data(self, o):
-        return {"automobiles": o.automobiles.name}
+    # def get_extra_data(self, o):
+    #     return {"automobiles": o.automobiles.name}
 
 class SalesEncoder(ModelEncoder):
     model = Sales
     properties = [
-    "vin",
+    "vehicle",
     "employee",
     "customer",
     "sale_price"
     ]
 
     encoders = {
-        "automobile": AutomobileVOEncoder,
-        "employee": EmployeeEncoder,
-        "customer": CustomerEncoder,
+        "vehicle": AutomobileVOEncoder(),
+        "employee": EmployeeEncoder(),
+        "customer": CustomerEncoder(),
     }
 
-    def get_extra_data(self, o):
-        return {"automobiles": o.automobiles.name}
+    # def get_extra_data(self, o):
+    #     return {"automobiles": o.automobiles}
 
 
 
@@ -143,16 +144,21 @@ def api_list_sales(request):
         )
     else:
         content = json.loads(request.body)
-        employee = Employees.objects.filter(name=content["employee"])
+        employee = Employees.objects.get(id=content["employee"])
         content["employee"] = employee
-        automobiles = AutomobileVO.objects.all()
-        for auto in automobiles:
-            print(auto.__dict__)
+
+        # content = json.loads(request.body)
+        customer = Customers.objects.get(id=content["customer"])
+        content["customer"] = customer
+        print(employee)
+        # automobiles = AutomobileVO.objects.all()
+        # for auto in automobiles:
+        #     print(auto.__dict__)
 
         # try:
-        automobile_href = content["vin"]
-        automobile = AutomobileVO.objects.get(vin=automobile_href)
-        content["vin"] = automobile
+        automobile_href = content["vehicle"]
+        automobile = AutomobileVO.objects.get(import_href=automobile_href)
+        content["vehicle"] = automobile
 
 # except AutomobileVO.DoesNotExist:
 #     return JsonResponse(

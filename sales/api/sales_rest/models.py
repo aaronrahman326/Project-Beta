@@ -56,13 +56,14 @@ class Vehicles(models.Model):
 
 class Sales(models.Model):
     vehicle = models.ForeignKey(
-        Vehicles,
+        AutomobileVO,
         on_delete=models.CASCADE,
         related_name='sale_vehicle',
         null=True,
         blank=True,
     )
-
+    # employee = models.ManyToManyField(Employees)
+    # customer = models.ManyToManyField(Customers)
     employee = models.ForeignKey(
         Employees,
         related_name="employee",

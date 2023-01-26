@@ -1,24 +1,5 @@
 import { useEffect, useState } from 'react';
 
-// function AppointmentList() {
-//     const [appointments, setAppointments] = useState([])
-
-//     const getData = async () => {
-//         const response = await fetch( "http://localhost:8080/api/appointments/" )
-
-//         // const data = await response.json();
-//         // const filteredData = data.appointments.filter(
-//         //     appointment => appointment.finished === false
-//         // )
-//         // setAppointments(filteredData)
-//         if(response.ok){
-//             const data = await response.json();
-//             setAppointments(data.appointments)
-//         }
-//     }
-//     useEffect(() => {
-//         getData()
-//     }, [])
 function AppointmentList() {
     const [appointments, setAppointments] = useState([])
   
@@ -42,20 +23,29 @@ function AppointmentList() {
                 'Content-Type': 'application/json'
             }
         }).then(() => { 
-          window.location.reload();
+        //   window.location.reload()
+            getData()
         })
     }
 
-    const updateStatus = (id) => {
-        const appointmentUrl = `http://localhost:8080/api/appointments/${id}`
+    const updateAppointment = (id) => {
+        const url=`http://localhost:8080/api/appointments/${id}/`
         const fetchConfig = {
-            method: 'put',
-            body: JSON.stringify({ finished: true }),
-            headers: {
-                'Content-Type': 'application/json'
-            }   
-        }
-    }    
+          method: "PUT",
+          body: JSON.stringify(
+            finished: True,
+         ),
+          headers: {
+            "Content-Type": "application/json",
+          }
+        }   
+        const response = fetch(url, fetchConfig)
+        // if (response.ok) {
+        //     const handleClick = id => {
+        //     updateAppointment(id);
+        // }}
+    }
+       
     console.log(appointments)
     return (
         <>
@@ -84,7 +74,7 @@ function AppointmentList() {
                 <td>{ appointment.technician.name }</td>
                 <td>{ appointment.reason }</td>
                 <td><button onClick={() => deleteAppointment(appointment.id)} className="btn btn-primary" type="button" >Delete this!</button></td>
-                <td><button onClick={() => updateStatus(appointment.id)} className="btn btn-primary" type="button" >Finished</button></td>
+                <td><button onClick={() => updateAppointment(appointment.id)} className="btn btn-success" type="button" >Finished</button></td>
               </tr>
             );
           })}

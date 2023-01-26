@@ -106,15 +106,19 @@ def api_appointment_detail(request,pk):
                 status=400
             )
     elif request.method == "PUT":
+        content = json.loads(request.body)
         try:
-            content = json.loads(request.body)
-            Appointment.objects.filter(id=pk).update(**content)
-            appointment= Appointment.object.get(id=pk)
+            if "technician" in content:
+                technician = Technician.objects.get(id=content["technician"])
+                content["technician"]=technician
+            
         except Appointment.DoesNotExist:
             return JsonResponse(
                 {"message": "no appointment exist"},
                 status=400
             )
+        Appointment.objects.filter(id=pk).update(**content)
+        appointment= Appointment.objects.get(id=pk)
         return JsonResponse(
                 appointment,
                 encoder = AppointmentDetailEncoder,

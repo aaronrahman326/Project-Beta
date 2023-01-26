@@ -20,7 +20,7 @@ function AppointmentList() {
         fetch(`http://localhost:8080/api/appointments/${id}`, {
             method: 'delete',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type' : 'application/json'
             }
         }).then(() => { 
             window.location.reload()

@@ -1,36 +1,35 @@
 import React, { useState, useEffect } from "react"
 
-function SaleForm() {
-    const [, setTechnicians] = useState([]);
+function SalesForm() {
+    const [automobiles, setAutomobiles] = useState([]);
+    const [sales, setSales] = useState([]);
 
     const [formData, setFormData] = useState({
-        customer_name: "",
-        vin: "",
-        start_date: "",
-        start_time: "",
-        technician: "",
-        reason: "",
+        automobiles: '',
+        employee: '',
+        customer: '',
+        sale_price: ''
   })
 
-    const [hasSignedUp, setHasSignedUp] = useState(false)
+    // const [hasSignedUp, setHasSignedUp] = useState(false)
 
-    const fetchTechnicianData = async () => {
-        const url="http://localhost:8080/api/technicians/"
-        const response = await fetch(url)
+    const fetchAutomobilesData = async () => {
+        const automobilesUrl="http://localhost:8100/api/automobiles/"
+        const response = await fetch(automobilesUrl)
 
         if (response.ok) {
-            const technicianData = await response.json()
-            setTechnicians(technicianData.technicians);
+            const automobilesData = await response.json()
+            setAutomobiles(automobilesData.automobiles);
         }
     }
     useEffect(() => {
-        fetchTechnicianData();
+        fetchAutomobilesData();
     }, []);
 
     const handleSubmit = async event => {
         event.preventDefault()
 
-        const appointmentUrl = "http://localhost:8080/api/appointments/"
+        const salesUrl = "http://localhost:8090/api/sales/"
         const fetchConfig = {
         method: "POST",
         body: JSON.stringify(formData),
@@ -38,18 +37,16 @@ function SaleForm() {
             "Content-Type": "application/json",
         },
         };
-        const response = await fetch(appointmentUrl, fetchConfig)
+        const response = await fetch(salesUrl, fetchConfig)
 
         if (response.ok) {
         setFormData({
-            customer_name: "",
-            vin: "",
-            start_date: "",
-            start_time: "",
-            technician: "",
-            reason: "",
+            automobiles: '',
+            employee: '',
+            customer: '',
+            sale_price: ''
         });
-        setHasSignedUp(true)
+        // setHasSignedUp(true)
         }
     };
 
@@ -118,10 +115,10 @@ function SaleForm() {
             <div className={alertClasses} id='success-message'>
             Congratulations! You're now bound by all terms and conditions!
             </div>
-            <button
+            {/* <button
               onClick={() => setHasSignedUp(false)}
               className='btn btn-primary'>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
@@ -129,4 +126,4 @@ function SaleForm() {
   );
 }
 
-export default AppointmentForm
+export default SalesForm

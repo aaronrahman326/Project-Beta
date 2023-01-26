@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
 import AppointmentList from './AppointmentList';
+import AppointmentForm from './AppointmentForm';
 import TechnicianForm from './TechnicianForm';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';

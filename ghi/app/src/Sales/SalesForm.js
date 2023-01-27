@@ -65,9 +65,9 @@ function SalesForm() {
 
         const salesUrl = "http://localhost:8090/api/sales/"
         const fetchConfig = {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
             "Content-Type": "application/json",
         },
         };

@@ -65,21 +65,10 @@ def api_list_sales(request):
 
         customer = Customers.objects.get(id=content["customer"])
         content["customer"] = customer
-        # print(employee)
-        # automobiles = AutomobileVO.objects.all()
-        # for auto in automobiles:
-        #     print(auto.__dict__)
 
-        # try:
         automobile_href = content["vehicle"]
         automobile = AutomobileVO.objects.get(import_href=automobile_href)
         content["vehicle"] = automobile
-
-# except AutomobileVO.DoesNotExist:
-#     return JsonResponse(
-#         {"ERROR": "TRY AGAIN BIG GUY"},
-#         status=400
-#     )
 
         sales = Sales.objects.create(**content)
         return JsonResponse(

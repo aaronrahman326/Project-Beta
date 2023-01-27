@@ -18,14 +18,14 @@ function SaleList() {
 
   const deleteSale = async (href) => {
     fetch(`http://localhost:8090${href}`, {
-        method: 'delete',
-        headers: {
-            'Content-Type': 'application/json'
-        }
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }).then(() => {
-        window.location.reload();
+      window.location.reload();
     })
-}
+  }
 
   return (
     <table className="table table-striped">

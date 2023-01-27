@@ -17,6 +17,20 @@ function SalesHistory() {
     getData()
   }, [])
 
+
+  // const getSalesmen = async event => {
+  //   const response = await fetch('http://localhost:8090/api/employees/');
+
+  //   if (response.ok) {
+  //     const employeeData = await response.json();
+  //     setSalesmen(employeeData.employees)
+  //   }
+  // }
+
+  // useEffect(()=>{
+  //   getSalesmen()
+  // }, [])
+
   // const handleChange = (event) => {
   //   setSalesmen(event.target.value)
   // }
@@ -26,21 +40,33 @@ function SalesHistory() {
     setSalesmen(event.target.value)
   }
 
+// console.log(handleKeyChange())
   const filterSalesmen = () => {
       return sales.filter((sale) =>
       sale['employee']['name'].toLowerCase().includes(salesmen)
+
       // sales
     )
   }
-console.log(salesmen.name)
+//   console.log()
+// console.log(sales)
   return (
   <>
     <h1>Filter Sales By Salesmen</h1>
-    {/* <input onChange={handleChange} placeholder="Filter by salesmen" /> */}
-    <select onChange={handleKeyChange} placeholder="Filter by salesman">
-      <option>{salesmen.name}</option>
+    <input onChange={handleKeyChange} placeholder="Filter by salesmen" />
+    {/* <select onChange={handleKeyChange} placeholder="Filter by salesman">
+      <option>Customer</option>
+      <option>Salesmen</option>
+    </select> */}
+      {/* <select onChange={handleKeyChange} value={getData.sales} required name='employee' id='employee' className='form-select' >
+        <option value=''>Choose a salesmen</option>
+          {filterSalesmen().map(sale=> {
+          return (
+          <option key={person.id} value={person.id} >{person.name}</option>
+          )
+        })}
+      </select> */}
 
-    </select>
     <table className="table table-striped">
       <thead>
         <tr>
@@ -68,3 +94,15 @@ console.log(salesmen.name)
 }
 
 export default SalesHistory;
+
+
+
+
+      {/* <select onChange={handleKeyChange} value={getData.sales} required name='employee' id='employee' className='form-select' >
+        <option value=''>Choose a salesmen</option>
+          {salesmen.map(person=> {
+          return (
+          <option key={person.id} value={person.id} >{person.name}</option>
+          )
+        })} */}
+      {/* </select> */}

@@ -28,11 +28,10 @@ function AppointmentHistory() {
         appointment["vin"].toLowerCase().includes(vinSearch)
         )
     }
-    console.log(appointments)
+    
     return (
         <>
         <h1>Search Appointments by VIN</h1>
-        <h2>{ vinSearch }</h2>
         <input onChange={ handleChange } placeholder="filter for vin" />
         <table className="table table-striped">
         <thead>

@@ -9,8 +9,8 @@ Team:
 
 ## Service microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+models are separated by appointment, automobile, and technician.
+when setting up an appointment, the appointment pulls vin data from automobileVO which is linked to automobile within inventory.  If the vin is True, as in the car has been part of our inventory before, it sets VIP status to True.
 
 ## Sales microservice
 

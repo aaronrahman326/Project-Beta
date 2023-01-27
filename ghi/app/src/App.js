@@ -55,6 +55,7 @@ function App() {
           </Route>
           <Route path="automobiles">
             <Route index element={<AutomobileList />} />
+            <Route path="new" element={<AutomobileForm />} />
           </Route>
         </Routes>
       </div>

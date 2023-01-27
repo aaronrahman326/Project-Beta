@@ -17,20 +17,29 @@ function SalesHistory() {
     getData()
   }, [])
 
-  const handleChange = (event) => {
+  // const handleChange = (event) => {
+  //   setSalesmen(event.target.value)
+  // }
+
+
+  const handleKeyChange = (event) => {
     setSalesmen(event.target.value)
   }
 
   const filterSalesmen = () => {
       return sales.filter((sale) =>
       sale['employee']['name'].toLowerCase().includes(salesmen)
+      // sales
     )
   }
-
+console.log(sales)
   return (
   <>
     <h1>Filter Sales By Salesmen</h1>
-    <input onChange={handleChange} placeholder="Filter by salesmen" />
+    {/* <input onChange={handleChange} placeholder="Filter by salesmen" /> */}
+    <select onChange={handleKeyChange} placeholder="Filter by salesman">
+      <option>JSON Derulo</option>
+    </select>
     <table className="table table-striped">
       <thead>
         <tr>

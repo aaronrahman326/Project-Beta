@@ -49,7 +49,7 @@ function App() {
             <Route index element={<ManufacturerList />} />
             <Route path="new" element={<ManufacturerForm />} />
           </Route>
-          <Route path="vehicles">
+          <Route path="models">
             <Route index element={<ModelList />} />
             <Route path="new" element={<ModelForm />} />
           </Route>

@@ -49,7 +49,6 @@ function EmployeeList() {
             <tr key={ employee.id }>
               <td>{ employee.name }</td>
               <td>{ employee.employee_number }</td>
-              <td><button className="btn btn-primary" onClick={() => handleDelete(employee.name)} type="button">Delete</button></td>
             </tr>
           );
         })}

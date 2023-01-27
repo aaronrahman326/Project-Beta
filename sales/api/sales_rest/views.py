@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from .models import AutomobileVO, Employees, Customers, Vehicles, Sales
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
@@ -12,13 +11,11 @@ def api_list_employees(request):
         employees = Employees.objects.all()
         return JsonResponse(
             {"employees":employees},
-            # print(AutomobileVO)
             encoder = EmployeeEncoder)
     else:
         content = json.loads(request.body)
         try:
             employees = Employees.objects.create(**content)
-            print(content)
             return JsonResponse(
                 employees,
                 encoder = EmployeeEncoder,
@@ -41,7 +38,6 @@ def api_list_customers(request):
         content = json.loads(request.body)
         try:
             customer = Customers.objects.create(**content)
-            print(content)
             return JsonResponse(
                 customer,
                 encoder = CustomerEncoder,
@@ -73,7 +69,6 @@ def api_list_sales(request):
         employee = Employees.objects.get(id=content["employee"])
         content["employee"] = employee
 
-        # content = json.loads(request.body)
         customer = Customers.objects.get(id=content["customer"])
         content["customer"] = customer
         # print(employee)

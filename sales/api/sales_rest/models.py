@@ -1,10 +1,5 @@
 from django.db import models
-from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
-# from django import forms
-
-# from .models import Automobile
-# Create your models here.
 
 
 class AutomobileVO(models.Model):
@@ -12,20 +7,6 @@ class AutomobileVO(models.Model):
     year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17)
     import_href = models.CharField(max_length=255)
-
-    # color = models.ForeignKey(
-    #     AutomobileVO,
-    #     on_delete=models.CASCADE,
-    #     related_name="color",
-    #     null=True,
-    # )
-
-    # year = models.ForeignKey(
-    #     AutomobileVO,
-    #     on_delete=models.CASCADE,
-    #     related_name="year",
-    #     null=True,
-    # )
 
     def get_api_url(self):
         return reverse("api_automobile", kwargs={"vin": self.vin})
@@ -55,7 +36,6 @@ class Vehicles(models.Model):
 
 
 class Sales(models.Model):
-    # name = models.CharField(max_length=200, null=True)
     vehicle = models.ForeignKey(
         AutomobileVO,
         on_delete=models.CASCADE,
@@ -63,8 +43,7 @@ class Sales(models.Model):
         null=True,
         blank=True,
     )
-    # employee = models.ManyToManyField(Employees)
-    # customer = models.ManyToManyField(Customers)
+
     employee = models.ForeignKey(
         Employees,
         related_name="employee",
@@ -79,16 +58,8 @@ class Sales(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
+    
     sale_price = models.BigIntegerField()
-
-    # def __str__(self):
-    #     return self.name
 
     def get_api_url(self):
         return reverse("api_show_sale", kwargs={"pk": self.pk})
-
-
-# class SaleForm(forms.Form):
-#     sales_person = forms.
-#     class Meta:
-#         model = Sales

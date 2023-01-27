@@ -1,8 +1,6 @@
 from .models import AutomobileVO, Employees, Customers, Vehicles, Sales
 from common.json import ModelEncoder
 
-# Create your views here.
-
 
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
@@ -46,10 +44,10 @@ class VehicleEncoder(ModelEncoder):
 class SalesDetailEncoder(ModelEncoder):
     model = Sales
     properties = [
-    "vehicle",
-    "employee",
-    "customer",
-    "sale_price",
+        "vehicle",
+        "employee",
+        "customer",
+        "sale_price",
     ]
 
     encoders = {
@@ -62,11 +60,10 @@ class SalesDetailEncoder(ModelEncoder):
 class SalesEncoder(ModelEncoder):
     model = Sales
     properties = [
-    # "name",
-    "vehicle",
-    "employee",
-    "customer",
-    "sale_price"
+        "vehicle",
+        "employee",
+        "customer",
+        "sale_price"
     ]
 
     encoders = {

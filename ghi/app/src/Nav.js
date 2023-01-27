@@ -39,7 +39,7 @@ function Nav() {
                     <NavLink className="dropdown-item" to="/sales/new">New Sale</NavLink>
                     <NavLink className="dropdown-item" to="/sales/search">Search Sales</NavLink>
                     <NavLink className="dropdown-item" to="/customers">Customer</NavLink>
-                    <NavLink className="dropdown-item" to="/cumstomers/new">Create Customer</NavLink>
+                    <NavLink className="dropdown-item" to="/customers/new">Create Customer</NavLink>
                     <NavLink className="dropdown-item" to="/employees/new">Create Employee</NavLink>
                     <NavLink className="dropdown-item" to="/employees">Employees</NavLink>
                 </div>

@@ -32,13 +32,14 @@ function SalesHistory() {
       // sales
     )
   }
-console.log(sales)
+console.log(salesmen.name)
   return (
   <>
     <h1>Filter Sales By Salesmen</h1>
     {/* <input onChange={handleChange} placeholder="Filter by salesmen" /> */}
     <select onChange={handleKeyChange} placeholder="Filter by salesman">
-      <option>JSON Derulo</option>
+      <option>{salesmen.name}</option>
+
     </select>
     <table className="table table-striped">
       <thead>

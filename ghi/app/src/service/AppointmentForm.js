@@ -1,75 +1,76 @@
 import React, { useState, useEffect } from "react"
 
 function AppointmentForm() {
-    const [technicians, setTechnicians] = useState([]);
+  const [technicians, setTechnicians] = useState([]);
 
-    const [formData, setFormData] = useState({
-        customer_name: "",
-        vin: "",
-        start_date: "",
-        start_time: "",
-        technician: "",
-        reason: "",
+  const [formData, setFormData] = useState({
+    customer_name: "",
+    vin: "",
+    start_date: "",
+    start_time: "",
+    technician: "",
+    reason: "",
   })
+
+  const [hasSignedUp, setHasSignedUp] = useState(false)
   
-    const [hasSignedUp, setHasSignedUp] = useState(false)
-   
-    const fetchTechnicianData = async () => {
-        const url="http://localhost:8080/api/technicians/"
-        const response = await fetch(url)
+  const fetchTechnicianData = async () => {
+    const url="http://localhost:8080/api/technicians/"
+    const response = await fetch(url)
 
-        if (response.ok) {
-            const technicianData = await response.json()
-            setTechnicians(technicianData.technicians);
-        }
+    if (response.ok) {
+        const technicianData = await response.json()
+        setTechnicians(technicianData.technicians);
     }
-    useEffect(() => {
-        fetchTechnicianData();
-    }, []);
+  }
+  useEffect(() => {
+      fetchTechnicianData();
+  }, []);
 
-    const handleSubmit = async event => {
-        event.preventDefault()
+  const handleSubmit = async event => {
+    event.preventDefault()
 
-        const appointmentUrl = "http://localhost:8080/api/appointments/"
-        const fetchConfig = {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-            "Content-Type": "application/json",
-        },
-        };
-        const response = await fetch(appointmentUrl, fetchConfig)
-
-        if (response.ok) {
-        setFormData({
-            customer_name: "",
-            vin: "",
-            start_date: "",
-            start_time: "",
-            technician: "",
-            reason: "",
-        });
-        setHasSignedUp(true)
-        }
+    const appointmentUrl = "http://localhost:8080/api/appointments/"
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+          "Content-Type": "application/json",
+      },
     };
+    
+    const response = await fetch(appointmentUrl, fetchConfig)
 
-    const handleChange = event => {
-        const value = event.target.value;
-        setFormData({
-        ...formData,
-        [event.target.name]: value,
-        });
-    };
-
-    let formClasses = "";
-    let alertClasses = "alert alert-success d-none mb-3";
-    let alertContainerClasses = "d-none";
-
-    if (hasSignedUp) {
-        formClasses = "d-none"
-        alertClasses = "alert alert-success mb-3"
-        alertContainerClasses = ""
+    if (response.ok) {
+      setFormData({
+          customer_name: "",
+          vin: "",
+          start_date: "",
+          start_time: "",
+          technician: "",
+          reason: "",
+      });
+    setHasSignedUp(true)
     }
+  };
+
+  const handleChange = event => {
+    const value = event.target.value;
+    setFormData({
+      ...formData,
+      [event.target.name]: value,
+    });
+  };
+
+  let formClasses = "";
+  let alertClasses = "alert alert-success d-none mb-3";
+  let alertContainerClasses = "d-none";
+
+  if (hasSignedUp) {
+    formClasses = "d-none"
+    alertClasses = "alert alert-success mb-3"
+    alertContainerClasses = ""
+  }
 
   return (
     <div className='row'>
@@ -116,7 +117,7 @@ function AppointmentForm() {
           </form>
           <div className={alertContainerClasses}>
             <div className={alertClasses} id='success-message'>
-            Congratulations! You're now bound by all terms and conditions!
+              Congratulations! You're now bound by all terms and conditions!
             </div>
             <button
               onClick={() => setHasSignedUp(false)}

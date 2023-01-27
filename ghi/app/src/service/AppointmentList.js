@@ -53,8 +53,11 @@ function AppointmentList() {
     const handleClick = id => {
         updateAppointment(id)
     }
-       
-    console.log(appointments)
+    
+    const handleDelete = id => {
+        deleteAppointment(id)
+    }
+
     return (
         <>
         <table className="table table-striped">
@@ -81,7 +84,7 @@ function AppointmentList() {
                     <td>{ appointment.start_time }</td>
                     <td>{ appointment.technician.name }</td>
                     <td>{ appointment.reason }</td>
-                    <td><button onClick={() => deleteAppointment(appointment.id)} className="btn btn-primary" type="button" >Delete this!</button></td>
+                    <td><button onClick={() => handleDelete(appointment.id)} className="btn btn-primary" type="button" >Delete this!</button></td>
                     <td><button onClick={() => handleClick(appointment.id)} className="btn btn-success" type="button" >Finished</button></td>
                 </tr>
             );

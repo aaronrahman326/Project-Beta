@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 function SaleList() {
   const [sales, setSales] = useState([])
+  const [salesmen, setSalesmen] = useState([])
 
   const getData = async () => {
     const response = await fetch('http://localhost:8090/api/sales/');
@@ -27,7 +28,23 @@ function SaleList() {
     })
 }
 
+  const handleChange = (event) => {
+    setSalesmen(event.target.value)
+  }
+
+
   return (
+  <>
+    <h1>Salesmen</h1>
+    <input onChange={handleChange} placeholder="Filter by salesmen" />
+
+    <div>
+      {salesmen.filter((person) => person.name.toLowerCase().includes(person.name)).map((person) => (
+      <div>
+        {person.name} - {person.customer} - {person.vin} - {person.sale_price}
+      </div>
+      ))}
+    </div>
     <table className="table table-striped">
       <thead>
         <tr>
@@ -51,6 +68,7 @@ function SaleList() {
         })}
       </tbody>
     </table>
+  </>
   );
 }
 

@@ -55,7 +55,7 @@ function Nav() {
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <NavLink className="dropdown-item" to="/manufacturers">Manufacturer List</NavLink>
                     <NavLink className="dropdown-item" to="/manufacturers/new">Create Manufacturer</NavLink>
-                    <NavLink className="dropdown-item" to="/appointments/new">Create Appointment</NavLink>
+                    <NavLink className="dropdown-item" to="/vehicles">Vehicle List</NavLink>
                     <NavLink className="dropdown-item" to="/appointments/search">Appointment History</NavLink>
                 </div>
             </div>

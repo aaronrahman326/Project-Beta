@@ -14,6 +14,7 @@ import SalesList from './Sales/SalesList';
 import SalesHistory from './Sales/SalesHistory';
 import ManufacturerForm from './Inventory/ManufacturerForm';
 import ManufacturerList from './Inventory/ManufacturerList';
+import VehicleList from './Inventory/VehicleList';
 
 function App() {
   return (
@@ -44,6 +45,9 @@ function App() {
           <Route path="manufacturers">
             <Route index element={<ManufacturerList />} />
             <Route path="new" element={<ManufacturerForm />} />
+          </Route>
+          <Route path="vehicles">
+            <Route index element={<VehicleList />} />
           </Route>
         </Routes>
       </div>

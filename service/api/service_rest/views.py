@@ -48,7 +48,7 @@ def api_list_appointments(request):
 
             vin = AutomobileVO.objects.get(vin=content["vin"])
             content["vip"]=True
-            content["vin"]=vin
+            # content["vin"]=vin
         except AutomobileVO.DoesNotExist:
             content["vip"]=False
 

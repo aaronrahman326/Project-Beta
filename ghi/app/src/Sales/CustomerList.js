@@ -17,14 +17,18 @@ function CustomerList() {
   }, [])
 
   const deleteCustomer = async (id) => {
-    fetch(`http://localhost:8080/api/customers/${id}`, {
-        method: 'delete',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(() => {
-        window.location.reload();
-    })
+    const deleteCustomerUrl = `http://localhost:8090/api/customers/${id}` 
+    const fetchConfig = {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    const response = await fetch(deleteCustomerUrl, fetchConfig)
+    
+    if (response.ok) {
+      getData();
+    }
 }
 
   return (

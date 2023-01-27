@@ -17,15 +17,23 @@ function EmployeeList() {
   }, [])
 
   const deleteEmployee = async (id) => {
-    fetch(`http://localhost:8080/api/employees/${id}`, {
-        method: 'delete',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(() => {
-        window.location.reload();
-    })
-}
+    const deleteEmployeeUrl = `http://localhost:8090/api/employees/${id}`;
+    const config = {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    const response = await fetch(deleteEmployeeUrl, config);
+
+    if (response.ok) {
+      getData()
+    }
+  }
+
+  const handleDelete = id => {
+    deleteEmployee(id)
+  }
 
   return (
     <table className="table table-striped">
@@ -41,7 +49,7 @@ function EmployeeList() {
             <tr key={ employee.id }>
               <td>{ employee.name }</td>
               <td>{ employee.employee_number }</td>
-              <td><button className="btn btn-primary" onClick={() => deleteEmployee(employee.name)} type="button">Delete</button></td>
+              <td><button className="btn btn-primary" onClick={() => handleDelete(employee.name)} type="button">Delete</button></td>
             </tr>
           );
         })}

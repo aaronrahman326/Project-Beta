@@ -25,9 +25,9 @@ function AppointmentList() {
                 'Content-Type' : 'application/json'
             }
         }
-        const response = await fetch(deleteAppointmentUrl, config)
+        const appointmentResponse = await fetch(deleteAppointmentUrl, config)
 
-        if (response.ok) {
+        if (appointmentResponse.ok) {
             getData()
         }
     }

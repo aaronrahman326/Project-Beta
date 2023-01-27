@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react"
 
 function SalesForm() {
     const [automobiles, setAutomobiles] = useState([]);
+    const [employees, setEmployees] = useState([]);
+    const [customers, setCustomers] = useState([]);
     const [sales, setSales] = useState([]);
 
     const [formData, setFormData] = useState({
-        automobiles: '',
+        vehicle: '',
         employee: '',
         customer: '',
         sale_price: ''
@@ -19,12 +21,44 @@ function SalesForm() {
 
         if (response.ok) {
             const automobilesData = await response.json()
-            setAutomobiles(automobilesData.automobiles);
+            // console.log(automobilesData)
+            setAutomobiles(automobilesData.autos);
         }
     }
     useEffect(() => {
         fetchAutomobilesData();
     }, []);
+
+
+    const fetchEmployeesData = async () => {
+        const employeesUrl="http://localhost:8090/api/employees/"
+        const response = await fetch(employeesUrl)
+
+        if (response.ok) {
+            const employeesData = await response.json()
+            // console.log(employeesData)
+            setEmployees(employeesData.employees);
+        }
+    }
+    useEffect(() => {
+        fetchEmployeesData();
+    }, []);
+
+
+    const fetchCustomersData = async () => {
+        const customersUrl="http://localhost:8090/api/customers/"
+        const response = await fetch(customersUrl)
+
+        if (response.ok) {
+            const customersData = await response.json()
+            // console.log(employeesData)
+            setCustomers(customersData.customers);
+        }
+    }
+    useEffect(() => {
+        fetchCustomersData();
+    }, []);
+
 
     const handleSubmit = async event => {
         event.preventDefault()
@@ -41,7 +75,7 @@ function SalesForm() {
 
         if (response.ok) {
         setFormData({
-            automobiles: '',
+            vehicle: '',
             employee: '',
             customer: '',
             sale_price: ''
@@ -75,49 +109,57 @@ function SalesForm() {
           <h1>Create a new sale</h1>
           <form
             onSubmit={handleSubmit}
-            id='create-appointment-form'
+            id='create-sale-form'
             className={formClasses}>
-            <div className="form-floating mb-3">
-              <input onChange={handleChange} value={formData.customer_name} placeholder='Customer Name' required name='customer_name' id='name' className='form-control' />
-              <label htmlFor='customer_name'>Name</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input onChange={handleChange} value={formData.vin} placeholder='VIN' required name='vin' id='vin' className='form-control' />
-              <label htmlFor='vin'>Vin Number</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input onChange={handleChange} value={formData.start_date} placeholder='Date' required name='start_date' id='start_date' type='date' className='form-control' />
-              <label htmlFor='date'>Date</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input onChange={handleChange} value={formData.start_time} placeholder='Time' required name='start_time' id='start_time' type='time' className='form-control' />
-              <label htmlFor='time'>Time</label>
-            </div>
             <div className="mb-3">
-              <select onChange={handleChange} value={formData.technician} required name='technician' id='technician' className='form-select' >
-                <option value=''>Choose a technician</option>
-                {technicians.map(technician => {
+              <select onChange={handleChange} value={formData.automobiles} required name='automobiles' id='automobiles' className='form-select' >
+                <option value=''>Choose an automobile</option>
+                {automobiles.map(automobile => {
                   return (
-                    <option key={technician.employee_number} value={technician.employee_number} >{technician.name}</option>
+                    <option key={automobile.vin} value={automobile.vin} >{automobile.model.manufacturer.name} {automobile.model.name}</option>
                   )
                 })}
               </select>
             </div>
-            <label htmlFor='technician'>Technician</label>
+            <div className="mb-3">
+              <select onChange={handleChange} value={formData.employee} required name='employee' id='employee' className='form-select' >
+                <option value=''>Choose a Employee</option>
+                {employees.map(employee => {
+                  return (
+                    <option key={employee.id} value={employee.id} >{employee.name}</option>
+                  )
+                })}
+              </select>
+            </div>
+            <div className="mb-3">
+              <select onChange={handleChange} value={formData.customer} required name='customer' id='customer' className='form-select' >
+                <option value=''>Choose a Customer</option>
+                {customers.map(customer => {
+                  return (
+                    <option key={customer.id} value={customer.id} >{customer.name}</option>
+                  )
+                })}
+              </select>
+            </div>
+            <div className="form-floating mb-3">
+              <input onChange={handleChange} value={formData.sale_price} placeholder='sale_price' required name='sale_price' id='sale_price' className='form-control' />
+              <label htmlFor='sale_price'>Sale Price</label>
+            </div>
+            {/* <label htmlFor='technician'>Technician</label>
             <div className="form-floating mb-3">
               <input onChange={handleChange} value={formData.reason} placeholder='Reason' required name='reason' id='reason' className='form-control'/>
               <label htmlFor='reason'>Reason</label>
-            </div>
+            </div> */}
             <button className='btn btn-primary'>Create</button>
           </form>
           <div className={alertContainerClasses}>
             <div className={alertClasses} id='success-message'>
             Congratulations! You're now bound by all terms and conditions!
             </div>
-            {/* <button
+            <button
               onClick={() => setHasSignedUp(false)}
               className='btn btn-primary'>
-            </button> */}
+            </button>
           </div>
         </div>
       </div>

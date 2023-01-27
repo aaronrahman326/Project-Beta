@@ -78,7 +78,7 @@ return (
     <div className="row">
     <div className="offset-3 col-6">
       <div className="shadow p-4 mt-4">
-        <h1>Create a new Manufacturer</h1>
+        <h1>Create a new Automobile</h1>
         <form onSubmit={ handleSubmit } id="create-auto-form">
             {/* <div className="mb-3">
               <select onChange={handleFormChange} value={formData.manufacturers} required name='manufacturer' id='manufacturer' className='form-select' >

@@ -14,7 +14,7 @@ function AppointmentList() {
     }
   
     useEffect(()=>{
-      getData()
+        getData()
     }, [])
     
     const deleteAppointment =  async (id) => {

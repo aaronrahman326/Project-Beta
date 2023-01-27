@@ -16,8 +16,8 @@ function SaleList() {
     getData()
   }, [])
 
-  const deleteSale = async (href) => {
-    fetch(`http://localhost:8080${id}`, {
+  const deleteSale = async (id) => {
+    fetch(`http://localhost:8080/sales/${id}`, {
         method: 'delete',
         headers: {
             'Content-Type': 'application/json'

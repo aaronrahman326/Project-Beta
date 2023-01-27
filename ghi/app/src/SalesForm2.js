@@ -19,7 +19,8 @@ function SalesForm() {
 
         if (response.ok) {
             const automobilesData = await response.json()
-            setAutomobiles(automobilesData.automobiles);
+            console.log(automobilesData)
+            setAutomobiles(automobilesData.autos);
         }
     }
     useEffect(() => {
@@ -75,9 +76,9 @@ function SalesForm() {
           <h1>Create a new sale</h1>
           <form
             onSubmit={handleSubmit}
-            id='create-appointment-form'
+            id='create-sale-form'
             className={formClasses}>
-            <div className="form-floating mb-3">
+            {/* <div className="form-floating mb-3">
               <input onChange={handleChange} value={formData.customer_name} placeholder='Customer Name' required name='customer_name' id='name' className='form-control' />
               <label htmlFor='customer_name'>Name</label>
             </div>
@@ -92,33 +93,33 @@ function SalesForm() {
             <div className="form-floating mb-3">
               <input onChange={handleChange} value={formData.start_time} placeholder='Time' required name='start_time' id='start_time' type='time' className='form-control' />
               <label htmlFor='time'>Time</label>
-            </div>
+            </div> */}
             <div className="mb-3">
-              <select onChange={handleChange} value={formData.technician} required name='technician' id='technician' className='form-select' >
-                <option value=''>Choose a technician</option>
-                {technicians.map(technician => {
+              <select onChange={handleChange} value={formData.automobiles} required name='automobiles' id='automobiles' className='form-select' >
+                <option value=''>Choose an automobile</option>
+                {automobiles.map(automobile => {
                   return (
-                    <option key={technician.employee_number} value={technician.employee_number} >{technician.name}</option>
+                    <option key={automobile.vin} value={automobile.vin} >{automobile.model.manufacturer.name} {automobile.model.name}</option>
                   )
                 })}
               </select>
             </div>
-            <label htmlFor='technician'>Technician</label>
+            {/* <label htmlFor='technician'>Technician</label>
             <div className="form-floating mb-3">
               <input onChange={handleChange} value={formData.reason} placeholder='Reason' required name='reason' id='reason' className='form-control'/>
               <label htmlFor='reason'>Reason</label>
             </div>
-            <button className='btn btn-primary'>Create</button>
+            <button className='btn btn-primary'>Create</button> */}
           </form>
-          <div className={alertContainerClasses}>
+          {/* <div className={alertContainerClasses}>
             <div className={alertClasses} id='success-message'>
             Congratulations! You're now bound by all terms and conditions!
             </div>
-            {/* <button
-              onClick={() => setHasSignedUp(false)}
+            <button
+              onSubmit={() => setHasSignedUp(false)}
               className='btn btn-primary'>
-            </button> */}
-          </div>
+            </button>
+          </div> */}
         </div>
       </div>
     </div>

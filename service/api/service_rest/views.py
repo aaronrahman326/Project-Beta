@@ -45,10 +45,8 @@ def api_list_appointments(request):
         content["technician"]=technician
 
         try:
-
             vin = AutomobileVO.objects.get(vin=content["vin"])
             content["vip"]=True
-            # content["vin"]=vin
         except AutomobileVO.DoesNotExist:
             content["vip"]=False
 

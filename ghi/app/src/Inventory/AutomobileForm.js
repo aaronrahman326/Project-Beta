@@ -1,26 +1,13 @@
 import React, { useState, useEffect } from 'react'
 
 function AutomobileForm() {
-    const [manufacturers, setManufacturers] = useState([])
     const [models, setModels] = useState([])
 
     const [formData, setFormData] = useState({
         year: '',
         color: '',
         vin: '',  
-    })
-    // const fetchManufacturerData = async () => {
-    //     const manufacturerUrl = "http://localhost:8100/api/manufacturers/"
-    //     const response = await fetch(manufacturerUrl)
-        
-    //     if (response.ok) {
-    //         const manufacturerData = await response.json()
-    //         setManufacturers(manufacturerData.manufacturers)
-    //     }
-    // }
-    // useEffect(() => {
-    //     fetchManufacturerData()
-    // }, [])    
+    })   
 
     const fetchModelData = async () => {
         const modelUrl = "http://localhost:8100/api/models/"
@@ -28,8 +15,6 @@ function AutomobileForm() {
         
         if (response.ok) {
             const modelData = await response.json()
-            // console.log(modelData)
-            // const filteredData = modelData.models.filter(model => setManufacturers)
             setModels(modelData.models)
         }
     }
@@ -60,7 +45,6 @@ function AutomobileForm() {
                 
             })
             setHasSignedUp(true)
-            //alert
         }
     }
 
@@ -80,26 +64,16 @@ return (
       <div className="shadow p-4 mt-4">
         <h1>Create a new Automobile</h1>
         <form onSubmit={ handleSubmit } id="create-auto-form">
-            {/* <div className="mb-3">
-              <select onChange={handleFormChange} value={formData.manufacturers} required name='manufacturer' id='manufacturer' className='form-select' >
-                <option value=''>Choose a manufacturer</option>
-                {manufacturers.map(manufacturer => {
-                  return (
-                    <option key={manufacturer.href} value={manufacturer.id} >{manufacturer.name} </option>
-                  )
-                })}
-              </select>
-            </div> */}
-            <div className="mb-3">
-              <select onChange={handleFormChange} value={formData.models} required name='model_id' id='model_id' className='form-select' >
-                <option value=''>Choose a model</option>
-                {models.map(model => {
-                  return (
-                    <option key={model.href} value={model.id} >{model.name} </option>
-                  )
-                })}
-              </select>
-            </div>
+          <div className="mb-3">
+            <select onChange={handleFormChange} value={formData.models} required name='model_id' id='model_id' className='form-select' >
+              <option value=''>Choose a model</option>
+              {models.map(model => {
+                return (
+                  <option key={model.href} value={model.id} >{model.name} </option>
+                )
+              })}
+            </select>
+          </div>
           <div className="form-floating mb-3">
             <input onChange={ handleFormChange } value={formData.vin} placeholder="VIN" required type="text" name="vin" id="vin" className="form-control"/>
             <label htmlFor="technician_name">Automobile VIN</label>

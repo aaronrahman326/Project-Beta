@@ -32,10 +32,14 @@ function AutomobileList() {
     }
 
   return (
+    <>
+    <h1>Automobiles</h1>
     <table className="table table-striped">
       <thead>
         <tr>
-          <th>Automobiles</th>
+          <th>Color</th>
+          <th>Year</th>
+          <th>VIN</th>
 
         </tr>
       </thead>
@@ -53,6 +57,7 @@ function AutomobileList() {
         })}
       </tbody>
     </table>
+    </>
   );
 }
 

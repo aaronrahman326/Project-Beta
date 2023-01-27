@@ -7,10 +7,12 @@ class AutomobileVO(models.Model):
     import_href = models.CharField(max_length=100, null=True, unique=True)
     color = models.CharField(max_length=50, null=True)
     year = models.PositiveSmallIntegerField(null=True)
-    vin = models.CharField(max_length=20, unique=True)
+    vin = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.vin
     def get_api_url(self):
-        return reverse("api_automobile", kwargs={"vin": self.vin})
+        return reverse("api_list_appointments", kwargs={"vin": self.vin})
 
 class Technician(models.Model):
     name = models.CharField(max_length=100)
@@ -37,6 +39,6 @@ class Appointment(models.Model):
     reason = models.CharField(max_length=200)
     
     def __str__(self):
-        return self.customer_name
+        return self.customer_name, self.vin
     def get_api_url(self):
         return reverse("api_list_appointment", kwargs={"pk": self.id})

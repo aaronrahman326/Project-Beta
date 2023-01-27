@@ -12,6 +12,8 @@ import EmployeeList from './Sales/EmployeeList';
 import SalesForm from './Sales/SalesForm';
 import SalesList from './Sales/SalesList';
 import SalesHistory from './Sales/SalesHistory';
+import ManufacturerForm from './Inventory/ManufacturerForm';
+import ManufacturerList from './Inventory/ManufacturerList';
 
 function App() {
   return (
@@ -38,6 +40,10 @@ function App() {
             <Route index element={<AppointmentList />} />
             <Route path="new" element={<AppointmentForm />} />
             <Route path="search" element={<AppointmentHistory />} />
+          </Route>
+          <Route path="manufacturers">
+            <Route index element={<ManufacturerList />} />
+            <Route path="new" element={<ManufacturerForm />} />
           </Route>
         </Routes>
       </div>

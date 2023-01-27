@@ -22,7 +22,7 @@ function SalesHistory() {
   }
 
   const filterSalesmen = () => {
-    return sales.filter((sale) =>
+      return sales.filter((sale) =>
       sale['employee']['name'].toLowerCase().includes(salesmen)
     )
   }

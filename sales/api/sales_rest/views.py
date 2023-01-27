@@ -54,6 +54,10 @@ def api_delete_employees(request, id):
     sale = Sales.objects.get(id)
     sale.delete()
 
+@require_http_methods(["DELETE"])
+def api_delete_customers(request, id):
+    customer = Customers.objects.get(id)
+    customer.delete()
 
 @require_http_methods(["GET", "POST"])
 def api_list_sales(request):
@@ -131,9 +135,9 @@ def api_show_sale(request, pk):
             sale.delete()
             return JsonResponse(
                 {"message": "SALE DELETED"},
-                sale,
-                encoder=SalesDetailEncoder,
-                safe=False,
+                # sale,
+                # encoder=SalesDetailEncoder,
+                # safe=False,
             )
         except Sales.DoesNotExist:
             return JsonResponse(

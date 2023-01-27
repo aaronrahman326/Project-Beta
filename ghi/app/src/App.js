@@ -5,12 +5,13 @@ import AppointmentList from './service/AppointmentList';
 import AppointmentForm from './service/AppointmentForm';
 import AppointmentHistory from  './service/AppointmentHistory';
 import TechnicianForm from './service/TechnicianForm';
-import CustomerForm from './CustomerForm';
-import CustomerList from './CustomerList';
-import EmployeeForm from './EmployeeForm';
-import EmployeeList from './EmployeeList';
-import SalesForm from './SalesForm';
-import SalesList from './SalesList';
+import CustomerForm from './Sales/CustomerForm';
+import CustomerList from './Sales/CustomerList';
+import EmployeeForm from './Sales/EmployeeForm';
+import EmployeeList from './Sales/EmployeeList';
+import SalesForm from './Sales/SalesForm';
+import SalesList from './Sales/SalesList';
+import SalesHistory from './Sales/SalesHistory';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="sales">
             <Route index element={<SalesList />} />
             <Route path="new" element={<SalesForm />} />
+            <Route path="search" element={<SalesHistory />} />
           </Route>
           <Route path="employees">
             <Route index element={<EmployeeList />} />

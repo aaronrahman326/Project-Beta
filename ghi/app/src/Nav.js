@@ -11,10 +11,10 @@ function Nav() {
         <div className="col">
             <div className="dropdown d-grid d-md-block">
                 <button
-                    className="btn btn-primary dropdown-toggle gap-2" 
-                    type="button" 
-                    id="dropdownMenuButton" 
-                    data-bs-toggle="dropdown" 
+                    className="btn btn-primary dropdown-toggle gap-2"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false">
                     Services
@@ -26,10 +26,10 @@ function Nav() {
                     <NavLink className="dropdown-item" to="/appointments/search">Appointment History</NavLink>
                 </div>
                 <button
-                    className="btn btn-secondary dropdown-toggle gap-2" 
-                    type="button" 
-                    id="dropdownMenuButton" 
-                    data-bs-toggle="dropdown" 
+                    className="btn btn-secondary dropdown-toggle gap-2"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false">
                     Sales
@@ -37,16 +37,17 @@ function Nav() {
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <NavLink className="dropdown-item" to="/sales">Sales List</NavLink>
                     <NavLink className="dropdown-item" to="/sales/new">New Sale</NavLink>
+                    <NavLink className="dropdown-item" to="/sales/search">Search Sales</NavLink>
                     <NavLink className="dropdown-item" to="/customers">Customer</NavLink>
                     <NavLink className="dropdown-item" to="/cumstomers/new">Create Customer</NavLink>
                     <NavLink className="dropdown-item" to="/employees/new">Create Employee</NavLink>
                     <NavLink className="dropdown-item" to="/employees">Employees</NavLink>
                 </div>
                 <button
-                    className="btn btn-primary dropdown-toggle" 
-                    type="button" 
-                    id="dropdownMenuButton" 
-                    data-bs-toggle="dropdown" 
+                    className="btn btn-primary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false">
                     Inventory
@@ -61,12 +62,12 @@ function Nav() {
     </div>
     </div>
     </nav>
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
     </>
   );
 }

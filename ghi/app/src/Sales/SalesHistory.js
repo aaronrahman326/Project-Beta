@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function SaleList() {
+function SalesHistory() {
   const [sales, setSales] = useState([])
   const [salesmen, setSalesmen] = useState([])
 
@@ -17,34 +17,20 @@ function SaleList() {
     getData()
   }, [])
 
-  const deleteSale = async (href) => {
-    fetch(`http://localhost:8080${href}`, {
-        method: 'delete',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(() => {
-        window.location.reload();
-    })
-}
-
   const handleChange = (event) => {
     setSalesmen(event.target.value)
   }
 
+  const filterSalesmen = () => {
+    return sales.filter((sale) =>
+      sale['employee']['name'].toLowerCase().includes(salesmen)
+    )
+  }
 
   return (
   <>
-    <h1>Salesmen</h1>
+    <h1>Filter Sales By Salesmen</h1>
     <input onChange={handleChange} placeholder="Filter by salesmen" />
-
-    <div>
-      {salesmen.filter((person) => person.name.toLowerCase().includes(person.name)).map((person) => (
-      <div>
-        {person.name} - {person.customer} - {person.vin} - {person.sale_price}
-      </div>
-      ))}
-    </div>
     <table className="table table-striped">
       <thead>
         <tr>
@@ -55,14 +41,13 @@ function SaleList() {
         </tr>
       </thead>
       <tbody>
-        {sales.map(sale => {
+        {filterSalesmen().map(sale => {
           return (
             <tr key={ sale.href }>
               <td>{ sale.employee.name }</td>
               <td>{ sale.customer.name }</td>
               <td>{ sale.vehicle.vin }</td>
               <td>{ sale.sale_price }</td>
-              <td><button className="btn btn-primary" onClick={() => deleteSale(sale.href)} type="button">Delete</button></td>
             </tr>
           );
         })}
@@ -72,4 +57,4 @@ function SaleList() {
   );
 }
 
-export default SaleList;
+export default SalesHistory;

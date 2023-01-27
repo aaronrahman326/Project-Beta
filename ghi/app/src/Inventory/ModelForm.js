@@ -93,7 +93,6 @@ function ModelForm() {
                 })}
               </select>
             </div>
-            <label htmlFor='technician'>Manufacturer</label>
             <button className='btn btn-primary'>Create</button>
           </form>
           <div className={alertContainerClasses}>

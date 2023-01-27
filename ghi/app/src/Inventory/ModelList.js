@@ -35,6 +35,7 @@ function ModelList() {
     <table className="table table-striped">
       <thead>
         <tr>
+          <th>Manufacturer</th>
           <th>Vehicle Models</th>
 
         </tr>
@@ -44,6 +45,7 @@ function ModelList() {
           return (
             <tr key={ model.href }>
               <td>{ model.manufacturer.name }</td>
+              <td>{ model.name }</td>
               <td> <img src={ model.picture_url } height="100" width="150" /></td>
               <td><button className="btn btn-primary" onClick={() => deleteVehicle(model.name)} type="button">Delete</button></td>
             </tr>

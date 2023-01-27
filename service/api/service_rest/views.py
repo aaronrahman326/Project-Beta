@@ -98,9 +98,6 @@ def api_appointment_detail(request,pk):
             appointment.delete()
             return JsonResponse(
                 {"message": "appointment deleted"},
-                appointment,
-                encoder=AppointmentDetailEncoder,
-                safe=False
             )
         except Appointment.DoesNotExist:
             return JsonResponse(

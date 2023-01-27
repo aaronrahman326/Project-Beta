@@ -112,7 +112,7 @@ function SalesForm() {
             id='create-sale-form'
             className={formClasses}>
             <div className="mb-3">
-              <select onChange={handleChange} value={formData.automobiles} required name='automobiles' id='automobiles' className='form-select' >
+              <select onChange={handleChange} value={formData.automobiles} required name='vehicle' id='vehicle' className='form-select' >
                 <option value=''>Choose an automobile</option>
                 {automobiles.map(automobile => {
                   return (
@@ -145,11 +145,6 @@ function SalesForm() {
               <input onChange={handleChange} value={formData.sale_price} placeholder='sale_price' required name='sale_price' id='sale_price' className='form-control' />
               <label htmlFor='sale_price'>Sale Price</label>
             </div>
-            {/* <label htmlFor='technician'>Technician</label>
-            <div className="form-floating mb-3">
-              <input onChange={handleChange} value={formData.reason} placeholder='Reason' required name='reason' id='reason' className='form-control'/>
-              <label htmlFor='reason'>Reason</label>
-            </div> */}
             <button className='btn btn-primary'>Create</button>
           </form>
           <div className={alertContainerClasses}>

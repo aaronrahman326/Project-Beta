@@ -1,69 +1,69 @@
 import React, { useState, useEffect } from "react"
 
 function ModelForm() {
-    const [manufacturers, setManufacturers] = useState([]);
+  const [manufacturers, setManufacturers] = useState([]);
 
-    const [formData, setFormData] = useState({
-        name: "",
-        picture_url: "",
-        manufacturer_id: "",        
+  const [formData, setFormData] = useState({
+    name: "",
+    picture_url: "",
+    manufacturer_id: "",        
   })
+
+  const [hasSignedUp, setHasSignedUp] = useState(false)
   
-    const [hasSignedUp, setHasSignedUp] = useState(false)
-   
-    const fetchManufacturerData = async () => {
-        const url="http://localhost:8100/api/manufacturers/"
-        const response = await fetch(url)
+  const fetchManufacturerData = async () => {
+    const url="http://localhost:8100/api/manufacturers/"
+    const response = await fetch(url)
 
-        if (response.ok) {
-            const manufacturerData = await response.json()
-            setManufacturers(manufacturerData.manufacturers);
-        }
+    if (response.ok) {
+      const manufacturerData = await response.json()
+      setManufacturers(manufacturerData.manufacturers);
     }
-    useEffect(() => {
-        fetchManufacturerData();
-    }, []);
+  }
+  useEffect(() => {
+    fetchManufacturerData();
+  }, []);
 
-    const handleSubmit = async event => {
-        event.preventDefault()
+  const handleSubmit = async event => {
+    event.preventDefault()
 
-        const appointmentUrl = "http://localhost:8100/api/models/"
-        const fetchConfig = {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-            "Content-Type": "application/json",
-        },
-        };
-        const response = await fetch(appointmentUrl, fetchConfig)
-
-        if (response.ok) {
-        setFormData({
-          name: "",
-          picture_url: "",
-          manufacturer_id: "",  
-        });
-        setHasSignedUp(true)
-        }
+    const appointmentUrl = "http://localhost:8100/api/models/"
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
+    const response = await fetch(appointmentUrl, fetchConfig)
 
-    const handleChange = event => {
-        const value = event.target.value;
-        setFormData({
-        ...formData,
-        [event.target.name]: value,
-        });
-    };
-
-    let formClasses = "";
-    let alertClasses = "alert alert-success d-none mb-3";
-    let alertContainerClasses = "d-none";
-
-    if (hasSignedUp) {
-        formClasses = "d-none"
-        alertClasses = "alert alert-success mb-3"
-        alertContainerClasses = ""
+    if (response.ok) {
+    setFormData({
+      name: "",
+      picture_url: "",
+      manufacturer_id: "",  
+    });
+    setHasSignedUp(true)
     }
+  };
+
+  const handleChange = event => {
+    const value = event.target.value;
+    setFormData({
+      ...formData,
+    [event.target.name]: value,
+    });
+  };
+
+  let formClasses = "";
+  let alertClasses = "alert alert-success d-none mb-3";
+  let alertContainerClasses = "d-none";
+
+  if (hasSignedUp) {
+    formClasses = "d-none"
+    alertClasses = "alert alert-success mb-3"
+    alertContainerClasses = ""
+  }
 
   return (
     <div className='row'>

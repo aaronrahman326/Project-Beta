@@ -25,7 +25,7 @@ function AppointmentHistory() {
     
     const filteredVin = () => {
       return appointments.filter((appointment) => 
-        appointment["vin"].toLowerCase().includes(setVinSearch)
+        appointment["vin"].toLowerCase().includes(vinSearch)
         )
     }
     console.log(appointments)

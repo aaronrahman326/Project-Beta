@@ -1,44 +1,44 @@
 import React, { useState } from 'react'
 
 function TechnicianForm() {
-    const [formData, setFormData] = useState({
-        name: '',
-        employee_number: '',
+  const [formData, setFormData] = useState({
+    name: '',
+    employee_number: '',
 
-    })
-    const [hasSignedUp, setHasSignedUp] = useState(false)
-        const handleSubmit = async (event) => {
-        event.preventDefault()
-        console.log(formData)
+  })
+  const [hasSignedUp, setHasSignedUp] = useState(false)
+  
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    console.log(formData)
 
-        const TechnicialUrl = 'http://localhost:8080/api/technicians/'
-        const fetchConfig = {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        const response = await fetch(TechnicialUrl, fetchConfig)
-
-        if (response.ok) {
-            setFormData({
-                name: '',
-                employee_number: ''
-            })
-            setHasSignedUp(true)
-            //alert
-        }
+    const TechnicialUrl = 'http://localhost:8080/api/technicians/'
+    const fetchConfig = {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
+    const response = await fetch(TechnicialUrl, fetchConfig)
 
-    const handleFormChange = (event) => {
-        const value = event.target.value
-        const inputName = event.target.name
+    if (response.ok) {
         setFormData({
-          ...formData,
-            [inputName]: value
+          name: '',
+          employee_number: ''
         })
+        setHasSignedUp(true)
     }
+  }
+
+  const handleFormChange = (event) => {
+    const value = event.target.value
+    const inputName = event.target.name
+    setFormData({
+      ...formData,
+      [inputName]: value
+    })
+  }
 
   const messageClasses = (!hasSignedUp) ? 'alert alert-success d-none mb-0' : 'alert alert-success mb-0';
   return (

@@ -19,12 +19,12 @@ function AppointmentForm() {
     const response = await fetch(url)
 
     if (response.ok) {
-        const technicianData = await response.json()
-        setTechnicians(technicianData.technicians);
+      const technicianData = await response.json()
+      setTechnicians(technicianData.technicians);
     }
   }
   useEffect(() => {
-      fetchTechnicianData();
+    fetchTechnicianData();
   }, []);
 
   const handleSubmit = async event => {
@@ -35,7 +35,7 @@ function AppointmentForm() {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
-          "Content-Type": "application/json",
+        "Content-Type": "application/json",
       },
     };
     

@@ -64,7 +64,7 @@ function AppointmentList() {
         <thead>
           <tr>
             <th>Customer</th>
-            <th>Vip</th>
+            <th>VIP</th>
             <th>VIN</th>
             <th>Start Date</th>
             <th>Start Time</th>

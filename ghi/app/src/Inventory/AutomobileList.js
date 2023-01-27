@@ -1,35 +1,35 @@
 import { useEffect, useState } from 'react';
 
 function AutomobileList() {
-    const [automobiles, setAutomobiles] = useState([])
+  const [automobiles, setAutomobiles] = useState([])
 
-    const getData = async () => {
-        const response = await fetch('http://localhost:8100/api/automobiles/');
+  const getData = async () => {
+    const response = await fetch('http://localhost:8100/api/automobiles/');
 
-        if (response.ok) {
-        const data = await response.json();
-        setAutomobiles(data.autos)
-        }
+    if (response.ok) {
+      const data = await response.json();
+      setAutomobiles(data.autos)
     }
+  }
 
-    useEffect(()=>{
+  useEffect(()=>{
+    getData()
+  }, [])
+
+  const deleteAutomobile = async (id) => {
+    const deleteAutomobileUrl = `http://localhost:8100/api/automobiles/${id}`
+    const config = {
+      method: 'delete',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    }
+    const response = await fetch(deleteAutomobileUrl, config);
+
+    if (response.ok) {
         getData()
-    }, [])
-
-    const deleteAutomobile = async (id) => {
-        const deleteAutomobileUrl = `http://localhost:8100/api/automobiles/${id}`
-        const config = {
-            method: 'delete',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        const response = await fetch(deleteAutomobileUrl, config);
-
-        if (response.ok) {
-            getData()
-        }
     }
+  }
 
   return (
     <>

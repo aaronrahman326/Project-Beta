@@ -11,7 +11,6 @@ def api_list_technicians(request):
     if request.method == "GET":
         technicians = Technician.objects.all()
         return JsonResponse(
-
             {"technicians":technicians},
             encoder = TechnicianListEncoder)
     else:
@@ -35,7 +34,6 @@ def api_list_appointments(request):
     if request.method == "GET":
         appointments = Appointment.objects.all()
         return JsonResponse(
-
             {"appointments":appointments},
             encoder = AppointmentDetailEncoder)
     else:
@@ -81,7 +79,6 @@ def api_appointment_detail(request,pk):
             if "technician" in content:
                 technician = Technician.objects.get(id=content["technician"])
                 content["technician"]=technician
-
         except Appointment.DoesNotExist:
             return JsonResponse(
                 {"message": "no appointment exist"},
@@ -89,6 +86,7 @@ def api_appointment_detail(request,pk):
             )
         Appointment.objects.filter(id=pk).update(**content)
         appointment= Appointment.objects.get(id=pk)
+        
         return JsonResponse(
                 appointment,
                 encoder = AppointmentDetailEncoder,
@@ -107,5 +105,4 @@ def api_appointment_detail(request,pk):
         except Appointment.DoesNotExist:
             return JsonResponse(
                 {"message": "no appointment exists"},
-
             )

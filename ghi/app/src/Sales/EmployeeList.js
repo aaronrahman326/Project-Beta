@@ -16,25 +16,6 @@ function EmployeeList() {
     getData()
   }, [])
 
-  const deleteEmployee = async (id) => {
-    const deleteEmployeeUrl = `http://localhost:8090/api/employees/${id}`;
-    const config = {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    const response = await fetch(deleteEmployeeUrl, config);
-
-    if (response.ok) {
-      getData()
-    }
-  }
-
-  const handleDelete = id => {
-    deleteEmployee(id)
-  }
-
   return (
     <table className="table table-striped">
       <thead>

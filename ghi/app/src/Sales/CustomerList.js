@@ -16,21 +16,6 @@ function CustomerList() {
     getData()
   }, [])
 
-  const deleteCustomer = async (id) => {
-    const deleteCustomerUrl = `http://localhost:8090/api/customers/${id}` 
-    const fetchConfig = {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    const response = await fetch(deleteCustomerUrl, fetchConfig)
-    
-    if (response.ok) {
-      getData();
-    }
-}
-
   return (
     <table className="table table-striped">
       <thead>
@@ -47,7 +32,6 @@ function CustomerList() {
               <td>{ customer.name }</td>
               <td>{ customer.address }</td>
               <td>{ customer.phone_number }</td>
-              <td><button className="btn btn-primary" onClick={() => deleteCustomer(customer.id)} type="button">Delete</button></td>
             </tr>
           );
         })}

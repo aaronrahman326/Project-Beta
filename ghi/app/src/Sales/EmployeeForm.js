@@ -28,7 +28,6 @@ function EmployeeForm() {
             employee_number: '',
         })
         setHasSignedUp(true);
-        // alert("Welcome to your first day!")
         }
     }
 

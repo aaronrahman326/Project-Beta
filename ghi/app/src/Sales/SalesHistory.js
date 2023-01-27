@@ -40,16 +40,12 @@ function SalesHistory() {
     setSalesmen(event.target.value)
   }
 
-// console.log(handleKeyChange())
   const filterSalesmen = () => {
       return sales.filter((sale) =>
       sale['employee']['name'].toLowerCase().includes(salesmen)
-
-      // sales
     )
   }
-//   console.log()
-// console.log(sales)
+
   return (
   <>
     <h1>Filter Sales By Salesmen</h1>

@@ -8,10 +8,10 @@ from django.urls import reverse
 
 
 class AutomobileVO(models.Model):
-    color = models.CharField(max_length=50, null=True)
-    year = models.PositiveSmallIntegerField(null=True)
+    color = models.CharField(max_length=50)
+    year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17)
-    import_href = models.CharField(max_length=255, null=True)
+    import_href = models.CharField(max_length=255)
 
     # color = models.ForeignKey(
     #     AutomobileVO,

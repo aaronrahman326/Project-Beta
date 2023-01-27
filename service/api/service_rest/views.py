@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from .models import Technician, AutomobileVO, Appointment
 from .encoders import TechnicianListEncoder, AppointmentDetailEncoder
 from django.http import JsonResponse
@@ -86,7 +85,7 @@ def api_appointment_detail(request,pk):
             )
         Appointment.objects.filter(id=pk).update(**content)
         appointment= Appointment.objects.get(id=pk)
-        
+
         return JsonResponse(
                 appointment,
                 encoder = AppointmentDetailEncoder,

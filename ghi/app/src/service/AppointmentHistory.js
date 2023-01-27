@@ -44,6 +44,7 @@ function AppointmentHistory() {
             <th>Start Time</th>
             <th>Technician</th>
             <th>Reason</th>
+            <th>Finished?</th>
           </tr>
         </thead>
         <tbody>
@@ -58,6 +59,7 @@ function AppointmentHistory() {
                     <td>{ appointment.start_time }</td>
                     <td>{ appointment.technician.name }</td>
                     <td>{ appointment.reason }</td>
+                    { appointment.finish && <td>Finished</td> }
                     
                 </tr>
             );

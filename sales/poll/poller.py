@@ -9,7 +9,6 @@ sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sales_project.settings")
 django.setup()
 
-# Import models from sales_rest, here.
 from sales_rest.models import AutomobileVO
 
 
@@ -23,7 +22,6 @@ def get_automobile():
                 "vin": automobile['vin'],
                 "color": automobile['color'],
                 "year": automobile['year'],
-                # "id": automobile['id'],
             }
         )
 
@@ -32,7 +30,6 @@ def poll():
     while True:
         print('Sales poller polling for data')
         try:
-            # Write your polling logic, here
             get_automobile()
         except Exception as e:
             print(e, file=sys.stderr)
